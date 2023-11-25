@@ -1,25 +1,34 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import Project from './Project';
+import {HashRouter} from "react-router-dom";
+import {Routes, Route, Navigate} from "react-router";
+import Signin from './Project/users/signin';
+import Signup from './Project/users/signup';
+import Account from './Project/users/account';
+import UserTable from './Project/users/table';
+import NavBar from './Project/nav/nav';
 
-function App() {
+function App() { 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <HashRouter>
+         <div className="row">
+        <div className="col-12">
+        <NavBar/>
+        <Routes>
+          {/* <Route path="/" element={<Navigate to="/project/home" />} /> */}
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/account/:id" element={<Account />} />
+          <Route path="/admin/users" element={<UserTable />} />
+        </Routes>
+      </div>
     </div>
-  );
+    </HashRouter>
+);
+
+
 }
 
 export default App;
