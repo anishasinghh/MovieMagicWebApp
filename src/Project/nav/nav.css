@@ -1,9 +1,12 @@
 .navbar {
     width: 100%;
+    --bs-navbar-padding-y: 0rem !important;
+    font-family: 'Nokora', Arial, sans-serif;
+    letter-spacing: 1px;
   }
   
   .navbar-container {
-    background-color: #CF9FFF;
+    background-color: black;
   }
   
   .navbar-brand {
@@ -11,6 +14,7 @@
   }
   
   .navbar-nav {
+    padding-left: 10px;
     width: 100%;
     justify-content: flex-end;
   }
@@ -18,4 +22,28 @@
   .nav-link {
     color: white !important;
   }
+  
+  .navbar-brand h3 {
+    margin-left: 20px; /* Adjust the left margin as needed */
+    /* or */
+    /* padding-left: 10px; Adjust the left padding as needed */
+  }
+
+  .navbar-toggler-icon {
+    background-color: white; /* Set the background color to white */
+  }
+
+
+  .btn.custom-purple-btn {
+    background-color: #CF9FFF;
+    border-color: #CF9FFF;
+    color: white;
+  }
+  
+  .btn.custom-purple-btn:hover {
+    background-color: white;
+    border-color: #CF9FFF;
+    color: #CF9FFF;
+  }
+  
   

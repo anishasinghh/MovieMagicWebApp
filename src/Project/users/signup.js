@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as client from "./client";
+import  "./signin.css";
 function Signup() {
   const [error, setError] = useState("");
   const [credentials, setCredentials] = useState({
@@ -15,27 +16,33 @@ function Signup() {
     }
   };
   return (
-    <div style={{marginLeft:"500px"}}>
-      <h1>Signup</h1>
+    <div className="signInFormContainer">
+      <h1 style={{color:"white", marginBottom:"30px"}}>Sign Up</h1>
       {error && <div>{error}</div>}
+      <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
+      <label for = "username" style={{color:"white"}}> Username </label>
       <input
         style={{width:"300px"}}
         value={credentials.username}
         onChange={(e) => setCredentials({
           ...credentials,
           username: e.target.value })} />
+      </div>
       <br/>
       <br/>
+      <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
+      <label for = "password" style={{color: "white"}}> Password </label>
       <input
         style={{width:"300px"}}
         value={credentials.password}
         onChange={(e) => setCredentials({
           ...credentials,
           password: e.target.value })} />
+      </div>
       <br/>
       <br/>
-      <button className="btn btn-primary" onClick={signup}>
-        Signup
+      <button className="btn custom-purple-btn" onClick={signup}>
+        Sign Up
       </button>
     </div>
   );

@@ -1,0 +1,24 @@
+.signInFormContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #3F3A37;
+    max-width: 500px; /* Set a maximum width for the container */
+    margin: 50px auto; /* Center the container horizontally */
+    padding: 50px; /* Optional: Add padding for better spacing */
+    border-radius: 12px;
+  }
+
+  
+  .btn.custom-purple-btn {
+    background-color: #CF9FFF;
+    border-color: #CF9FFF;
+    color: white;
+  }
+  
+  .btn.custom-purple-btn:hover {
+    background-color: white;
+    border-color: #CF9FFF;
+    color: #CF9FFF;
+  }
+  
