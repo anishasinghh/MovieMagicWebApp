@@ -12,7 +12,7 @@ export const fullTextSearch = async (movieName) => {
   const response = await axios.get(
     `${OMDB_API}/?s=${movieName}&apikey=f11c3343`
   );
-  return response.data.Search;
+  return response.data;
 };
 
 export const fetchMovieById = async (imdbId) => {
