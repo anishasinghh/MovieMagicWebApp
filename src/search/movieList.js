@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import * as client from "./client";
 import { NavLink } from "react-router-dom";
+import MissingMovieImage from "../search/MissingMovie.jpg";
 
 function MovieList() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -41,11 +42,29 @@ function MovieList() {
     const movieItems = movies.map((movie) => {
         return (
             <div key={movie.imdbID}>
-                <h3 style={{ color: "white" }}>{movie.Title}</h3>
-                <img src={movie.Poster} alt={movie.Title} />
-                <NavLink to={`/details/${movie.imdbID}`}>
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img class="bd-placeholder-img card-img-top" src={movie.Poster == "N/A" ? MissingMovieImage : movie.Poster} />
+                        <div class="card-body">
+                            <h5 class="card-text" style={{ color: "black" }}>{movie.Title}</h5>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <NavLink to={`/details/${movie.imdbID}`}>
+                                        <button className="btn btn-outline-dark"> Details </button>
+                                    </NavLink>
+                                    {/* <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> */}
+                                </div>
+                                <small class="text-body-secondary">{movie.Year}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                {/* <NavLink to={`/details/${movie.imdbID}`}>
                     <button className="btn btn-primary"> Details </button>
-                </NavLink>
+                </NavLink> */}
             </div>
         );
     });
@@ -55,10 +74,10 @@ function MovieList() {
             <section className="py-5 text-center container">
                 <div className="row py-lg-5">
                     <div className="col-lg-6 col-md-8 mx-auto">
-                        <h1 className="fw-light" style={{color:"white"}}>Search Movies</h1>
-                        <p className="lead" style={{color:"#CF9FFF"}}>Your next movie adventure awaits...</p>
+                        <h1 className="fw-light" style={{ color: "white" }}>Search Movies</h1>
+                        <p className="lead" style={{ color: "#CF9FFF" }}>Your next movie adventure awaits...</p>
                         <input
-                            style={{marginBottom:"20px", width:"500px"}}
+                            style={{ marginBottom: "20px", width: "500px" }}
                             placeholder="ex. Hunger Games"
                             id="movie"
                             type="text"
@@ -67,16 +86,20 @@ function MovieList() {
                         />
                         <p>
                             <button className="btn custom-purple-btn" onClick={() => fetchMovies(searchTerm)}>Search</button>
-                            {/* <a href="#" className="btn btn-primary my-2">Main call to action</a>
-                            <a href="#" className="btn btn-secondary my-2">Secondary action</a> */}
                         </p>
                     </div>
                 </div>
             </section>
-           
 
-            {movieItems}
+            <div class="album py-5">
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        {movieItems}
+                    </div>
+                </div>
+            </div>
             {noMoviesFound ? <h6 style={{ color: "white" }}>No Movies Found!</h6> : null}
+
         </div>
     );
 }
