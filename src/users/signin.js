@@ -2,11 +2,12 @@ import * as client from "./client";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./signin.css";
-function Signin() {
+function Signin({ onLogin }) {
   const [credentials, setCredentials] = useState({ username: "", password: "" });
   const navigate = useNavigate();
   const SignIn = async () => {
     await client.signin(credentials);
+    onLogin();
     navigate("/account");
   };
   return (
