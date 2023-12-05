@@ -9,7 +9,7 @@ function NavBar() {
   return (
 <Navbar expand="lg" className="navbar" fluid>
   <Container className="navbar-container" fluid>
-    <Navbar.Brand as={Link} to="/home" className="navbar-brand"><h3> <MdMovieFilter /> Movie Magic</h3></Navbar.Brand>
+    <Navbar.Brand as={Link} to="/home" className="navbar-brand fw-light"><h3> <MdMovieFilter /> Movie Magic</h3></Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="navbar-nav ms-auto">

@@ -3,4 +3,13 @@
     border-color: #CF9FFF;
     color: white;
   }
+
+
+  .btn.btn-outline.custom-purple-btn {
+    border-color: #CF9FFF;
+    color: #CF9FFF;
+    background-color: transparent;
+}
+
+
   

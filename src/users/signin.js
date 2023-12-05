@@ -11,7 +11,7 @@ function Signin() {
   };
   return (
     <div className="signInFormContainer">
-    <h1 style={{color:"white"}}>Sign In</h1>
+    <h1 className="fw-light" style={{color:"white"}}>Sign In</h1>
     <br/> 
     <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
       <label for = "username" style={{color:"white"}}> Username </label>
