@@ -12,7 +12,7 @@ function Components() {
       <div className="col-10">
         <NavBar/>
         <Routes>
-          {/* <Route path="/" element={<Navigate to="/project/home" />} /> */}
+          
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/details" element={<MovieDetails />} />
