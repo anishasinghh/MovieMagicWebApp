@@ -30,19 +30,19 @@ function App() {
  
   const [movie, setMovie] = useState({
     title: "New Movie",      likes: "New Number",
-    posterUrl: "New URL",
+    posterUrl: "New URL", id: 0
   });
 
   const [movies, setMovies] = useState([]);
 
   const [user, setUser] = useState({
-    username: "New Username", followers: 0
+    username: "New Username", firstName: "New First Name", followers: 0, liked_movies: []
   });
 
   const [users, setUsers] = useState([]);
 
   const [allUser, setAllUser] = useState({
-    username: "New Username", followers: 0, role: "New Role",
+    username: "New Username", firstName: "New First Name", followers: 0, role: "New Role", liked_movies: []
   });
 
   const [allUsers, setAllUsers] = useState([]);
