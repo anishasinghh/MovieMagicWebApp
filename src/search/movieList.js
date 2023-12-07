@@ -97,8 +97,9 @@ function MovieList() {
                         {movieItems}
                     </div>
                 </div>
+                {noMoviesFound ? <h3 style={{ color: "white", textAlign: "center" }}>No Movies Found!</h3> : null}
             </div>
-            {noMoviesFound ? <h6 style={{ color: "white" }}>No Movies Found!</h6> : null}
+
 
         </div>
     );
