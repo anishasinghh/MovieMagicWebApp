@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import "./homeUser.css"
+import { Link } from "react-router-dom";
 
 function HomeUser(
     { movies, movie, setMovie, users, user, setUser }
@@ -7,6 +8,8 @@ function HomeUser(
     
     const sortedUsers = [...users].sort((a, b) => (b.followers ? b.followers.length : 0) - (a.followers ? a.followers.length : 0));
     const top4Users = sortedUsers.slice(0, 4);
+
+   
     
     return (
       <div className="container-fluid">
@@ -31,6 +34,14 @@ function HomeUser(
                   <div className="card-body">
                     <h5 className="card-title">{likedMovie.title}</h5>
                     <p className="card-text">Likes: {likedMovie.likes}</p>
+                    
+                      <button class="btn btn-outline-dark" > 
+                      <Link to={`/details/${likedMovie.imdbID}`} className="dtext">
+                        Details
+                      </Link>
+                       </button>
+
+                 
                   </div>
                 </div>
               </div>

@@ -30,7 +30,7 @@ function App() {
  
   const [movie, setMovie] = useState({
     title: "New Movie",      likes: "New Number",
-    posterUrl: "New URL", id: 0
+    posterUrl: "New URL", id: 0, imdbID: "",
   });
 
   const [movies, setMovies] = useState([]);
@@ -52,7 +52,6 @@ function App() {
   };
 
   const API_BASE = process.env.REACT_APP_BASE_API_URL || "http://localhost:4000/api";
-  
   
   const MOVIES_URL = `${API_BASE}/movies`
 
