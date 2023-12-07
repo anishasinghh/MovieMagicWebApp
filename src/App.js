@@ -15,6 +15,7 @@ import { useState } from "react";
 import Home from './home/home';
 import HomeUser from './homeUser/homeUser';
 import HomeMain from './homeMain';
+import Profile from './users/profile';
 
 function App() { 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -143,6 +144,7 @@ function App() {
           <Route path="/account" element={<Account onLogout={handleLogout} onSignIn={handleUser}/>} />
           <Route path="/account/:id" element={<Account />} />
           <Route path="/admin/users" element={<UserTable />} />
+          <Route path="/profile/:username" element={<Profile />} />
         </Routes>
       </div>
     </div>

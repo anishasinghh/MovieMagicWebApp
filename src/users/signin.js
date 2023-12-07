@@ -7,8 +7,9 @@ function Signin({ onLogin }) {
   const navigate = useNavigate();
   const SignIn = async () => {
     await client.signin(credentials);
+    const username = credentials.username;
     onLogin();
-    navigate("/account");
+    navigate(`/profile/${username}`);
   };
   return (
     <div className="signInFormContainer">

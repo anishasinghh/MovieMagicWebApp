@@ -35,6 +35,12 @@ export const findUserById = async (id) => {
   const response = await request.get(`${USERS_API}/${id}`);
   return response.data;
 };
+
+export const findUserByUsername = async (username) => {
+  const response = await request.get(`${USERS_API}/profile/${username}`);
+  return response.data;
+};
+
 export const deleteUser = async (user) => {
   const response = await request.delete(
     `${USERS_API}/${user._id}`);
