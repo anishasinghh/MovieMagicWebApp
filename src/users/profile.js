@@ -3,33 +3,52 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-function Profile({ }) {
-    const { username } = useParams();
-    const [profile, setProfile] = useState({ username: "username", firstname: "first"});
+function Profile({ user, isLoggedIn }) {
+  const { username } = useParams();
+  const [profile, setProfile] = useState({ username: "username", firstname: "first", followers: [], following: [], role: "" });
+  const [currentUser, setCurrentUser] =  useState({ username: "username", firstname: "first", followers: [], following: [], role: "" });
 
-    const findUserByUsername = async (username) => {
-        console.log(username);
-        const user = await client.findUserByUsername(username);
-        console.log(user);
-        setProfile(user);
-    };
+  const findUserByUsername = async (username) => {
+    console.log(username);
+    const foundUser = await client.findUserByUsername(username);
+    setProfile(foundUser);
+    const current = await client.account();
+    setCurrentUser(current);
+    console.log(foundUser)
+    console.log(currentUser);
+  };
 
-    useEffect(() => {
-        if (username) {
-            findUserByUsername(username);
-        }
-    }, [username]);
+  const handleFollowButtonClick = async (usernameToAdd, currentUser) => {
+    try {
+      await client.addFollowing(usernameToAdd, currentUser);
+      console.log('added follower')
+      // Optionally, update the state or trigger a re-fetch of the user profile 
+    } catch (error) {
+      console.error('Error following user:', error);
+      console.log(usernameToAdd)
+      console.log(currentUser)
 
-    return (
-        <div>
-            <h1 style={{color:"white"}}>{profile.username}'s Profile</h1>
-            <h1>{profile.firstName}</h1>
-            <h2>{profile.username}</h2>
+    }
+  };
 
-            <div>
+  useEffect(() => {
+    if (username) {
+      findUserByUsername(username);
+    }
+  }, [username]);
+
+  return (
+    <div>
+      <h1 style={{ color: "white" }}>{profile.username}'s Profile</h1>
+      <h1>{profile.firstName}</h1>
+      <h2>{profile.username}</h2>
+      <h2>{profile.email}</h2>
+      <h2>{profile.role}</h2>
+
+      <div>
         <h2>Followers:</h2>
         <ul>
-          {profile.followers.map((follower, index) => (
+        {profile.followers.map((follower, index) => (
             <li key={index}>
               <Link to={`/profile/${follower}`}>{follower}</Link>
             </li>
@@ -40,15 +59,32 @@ function Profile({ }) {
       <div>
         <h2>Following:</h2>
         <ul>
-          {profile.following.map((followedUser, index) => (
+        {profile.following.map((following, index) => (
             <li key={index}>
-              <Link to={`/profile/${followedUser}`}>{followedUser}</Link>
+              <Link to={`/profile/${following}`}>{following}</Link>
             </li>
           ))}
         </ul>
       </div>
-        </div>  
-    )
+
+      <div>
+        <button onClick={() => handleFollowButtonClick(profile.username, currentUser)}>
+          Follow
+        </button>
+      </div>
+      <h2>
+        {currentUser.role}
+      </h2>
+      {currentUser.role === "ADMIN" && (
+        <div className="text-center mt-3">
+          <Link to="/admin/users" className="btn btn-warning ">
+            Manage Users
+          </Link>
+        </div>
+      )}
+
+    </div>
+  )
 }
 
 export default Profile

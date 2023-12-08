@@ -141,10 +141,10 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/search" element={<MovieList />} />
           <Route path="/details/:imdbId" element={<MovieDetails />} />
-          <Route path="/account" element={<Account onLogout={handleLogout} onSignIn={handleUser}/>} />
+          <Route path="/account" element={<Account onLogout={handleLogout} onSignIn={handleUser} />} />
           <Route path="/account/:id" element={<Account />} />
           <Route path="/admin/users" element={<UserTable />} />
-          <Route path="/profile/:username" element={<Profile />} />
+          <Route path="/profile/:username" element={<Profile user={allUser} onSignIn={handleUser} isLoggedIn={isLoggedIn}/>} />
         </Routes>
       </div>
     </div>

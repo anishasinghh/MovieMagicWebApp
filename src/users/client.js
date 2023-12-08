@@ -56,6 +56,23 @@ export const signout = async () => {
   return response.data;
 };
 
+export const addFollowing = async (usernameToAdd, currentUser) => {
+  console.log(usernameToAdd)
+    console.log(currentUser)
+  try {
+    
+    const response = await axios.post(`${USERS_API}/profile/addFollowing`, {
+      usernameToAdd, currentUser,
+    });
+    console.log('client added following');
+
+    return response.data;
+  } catch (error) {
+    console.log("error found")
+    throw error;
+  }
+};
+
 
 
 
