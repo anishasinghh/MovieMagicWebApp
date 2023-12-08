@@ -41,9 +41,15 @@ export const decreaseLikes = async (imdbID) => {
 export const updateUserLikes = async (userID, movieID) => {
   console.log(userID)
   const response = await axios.put(`${LOCAL_USERS_API}/${userID}`, { movieId: movieID });
-  console.log(response.data);
   return response.data;
 };
+
+export const removeUserLikes = async (userID, movieID) => {
+  console.log(userID)
+  const response = await axios.put(`${LOCAL_USERS_API}/remove/${userID}`, { movieId: movieID });
+  return response.data;
+};
+
 
 
 // export const fetchTracksByAlbumId = async (albumId) => {
