@@ -30,7 +30,7 @@ function App() {
 
   const [movie, setMovie] = useState({
     title: "New Movie", likes: "New Number",
-    posterUrl: "New URL", id: 0
+    posterUrl: "New URL", id: 0, imdbID: "",
   });
 
 

@@ -5,7 +5,7 @@ import "./signin.css";
 function Signup() {
   const [error, setError] = useState("");
   const [credentials, setCredentials] = useState({
-    username: "", password: ""
+    username: "", password: "", firstName: "", lastName: "", email: "", dob: ""
   });
   const navigate = useNavigate();
   const signup = async () => {
@@ -40,6 +40,54 @@ function Signup() {
           onChange={(e) => setCredentials({
             ...credentials,
             password: e.target.value
+          })} />
+      </div>
+      <br />
+      <br />
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+        <label for="firstName" style={{ color: "white" }}> First Name </label>
+        <input
+          style={{ width: "300px" }}
+          value={credentials.firstName}
+          onChange={(e) => setCredentials({
+            ...credentials,
+            firstName: e.target.value
+          })} />
+      </div>
+      <br />
+      <br />
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+        <label for="lastName" style={{ color: "white" }}> Last Name </label>
+        <input
+          style={{ width: "300px" }}
+          value={credentials.lastName}
+          onChange={(e) => setCredentials({
+            ...credentials,
+            lastName: e.target.value
+          })} />
+      </div>
+      <br />
+      <br />
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+        <label for="email" style={{ color: "white" }}> Email </label>
+        <input
+          style={{ width: "300px" }}
+          value={credentials.email}
+          onChange={(e) => setCredentials({
+            ...credentials,
+            email: e.target.value
+          })} />
+      </div>
+      <br />
+      <br />
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+        <label for="dob" style={{ color: "white" }}> Date of Birth </label>
+        <input type="date"
+          style={{ width: "300px" }}
+          value={credentials.dob}
+          onChange={(e) => setCredentials({
+            ...credentials,
+            dob: e.target.value
           })} />
       </div>
       <br />
