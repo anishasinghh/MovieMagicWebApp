@@ -5,43 +5,60 @@ import "./movieDetails.css";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
 
-function MovieDetails({ user, isLoggedIn }) {
+function MovieDetails({ user, isLoggedIn, users }) {
     const [movieDetail, setMovieDetail] = useState({});
     const [isLiked, setIsLiked] = useState(false); // State to keep track of like status
     const [currentMovie, setCurrentMovie] = useState({});
     const [likes, setLikes] = useState(null);
+    const [usersLiked, setUsersLiked] = useState([]);
 
     const { imdbId } = useParams();
 
     useEffect(() => {
+        // setUsersLiked([]);
         fetchMovieDetailsById(imdbId);
-        fetchMovieByIMDB(imdbId);
+        // fetchMovieByIMDB(imdbId);
     }, [imdbId]);
 
-    // for remote api
     const fetchMovieDetailsById = async (imdbId) => {
         const response = await client.fetchMovieById(imdbId);
         setMovieDetail(response);
-        console.log(movieDetail);
-        if (response && response.likes !== undefined) {
-            setLikes(response.likes);
+
+        const response2 = await client.fetchMovieByIMDB(imdbId);
+        setCurrentMovie(response2);
+        let updatedUsersLiked = [];
+        if (response2 && response2.likes !== undefined) {
+            setLikes(response2.likes);
         } else {
             setLikes("NA");
         }
-        // handleLikes();
+
+        for (const userObj of users) {
+            if (userObj.liked_movies.includes(response2.id) && !updatedUsersLiked.some(u => u._id === userObj._id)) {
+                updatedUsersLiked.push(userObj);
+            }
+        }
+
+        setUsersLiked(updatedUsersLiked);
     };
 
-    // for local api 
-    const fetchMovieByIMDB = async (imdbId) => {
-        const response = await client.fetchMovieByIMDB(imdbId);
-        setCurrentMovie(response);
-        if (response && response.likes !== undefined) {
-            setLikes(response.likes);
-        } else {
-            setLikes("NA");
-        }
-        // handleLikes();
-    };
+
+    // // for local api 
+    // const fetchMovieByIMDB = async (imdbId) => {
+    //     const response2 = await client.fetchMovieByIMDB(imdbId);
+    //     setCurrentMovie(response2);
+    //     if (response2 && response2.likes !== undefined) {
+    //         setLikes(response2.likes);
+    //     } else {
+    //         setLikes("NA");
+    //     }
+    //     for (const userObj of users) {
+    //         if (userObj.liked_movies.includes(response2.id) && !usersLiked.some(u => u._id === userObj._id)) {
+    //             setUsersLiked(prevUsersLiked => [...prevUsersLiked, userObj]);
+    //         }
+    //     }
+    //     // handleLikes();
+    // };
 
     const handleLikeClick = async () => {
         if (isLoggedIn) {
@@ -108,6 +125,19 @@ function MovieDetails({ user, isLoggedIn }) {
                             <tr>
                                 <th scope="row" style={{ backgroundColor: 'black', color: 'white' }}>Likes</th>
                                 <td style={{ backgroundColor: 'black', color: 'white' }}>{likes}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style={{ backgroundColor: 'black', color: 'white' }}>Liked By</th>
+                                <td style={{ backgroundColor: 'black', color: 'white' }}>
+                                    <ul>
+                                        {console.log(usersLiked)}
+                                        {usersLiked.map((likedUser, index) => (
+                                            <li key={index}>
+                                                {likedUser.firstName} {likedUser.lastName}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
