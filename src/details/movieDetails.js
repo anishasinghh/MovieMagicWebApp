@@ -50,7 +50,6 @@ function MovieDetails({ user, isLoggedIn }) {
                 const updatedMovie = await client.increaseLikes(imdbId);
                 setCurrentMovie(updatedMovie);
                 setLikes(updatedMovie.likes);
-                console.log(updatedMovie.id);
                 await client.updateUserLikes(user._id, updatedMovie.id)
 
             } else {
@@ -58,6 +57,7 @@ function MovieDetails({ user, isLoggedIn }) {
                 const updatedMovie = await client.decreaseLikes(imdbId);
                 setCurrentMovie(updatedMovie);
                 setLikes(updatedMovie.likes);
+                await client.removeUserLikes(user._id, updatedMovie.id)
             }
             setIsLiked(!isLiked); // Toggle the like status after the action
         } else {
@@ -73,14 +73,16 @@ function MovieDetails({ user, isLoggedIn }) {
                         <h1 className="fw-light mb-3">{movieDetail.Title}</h1>
                         <img src={movieDetail.Poster} alt={movieDetail.Title} />
                     </div>
-                    <div className="text-center mt-3">
-                        <button
-                            className={`btn ${isLiked ? 'btn-danger' : 'btn-outline-danger'}`}
-                            onClick={handleLikeClick}
-                        >
-                            {isLiked ? <FaHeart /> : <CiHeart />}
-                        </button>
-                    </div>
+                    {(user.role === "USER" || !isLoggedIn) && (
+                        <div className="text-center mt-3">
+                            <button
+                                className={`btn ${isLiked ? 'btn-danger' : 'btn-outline-danger'}`}
+                                onClick={handleLikeClick}
+                            >
+                                {isLiked ? <FaHeart /> : <CiHeart />}
+                            </button>
+                        </div>
+                    )}
                     <table className="table">
                         <tbody>
                             <tr>
