@@ -3,7 +3,8 @@ import axios from "axios";
 const KEY = process.env.OMDB_API_KEY;
 const OMDB_API = "https://www.omdbapi.com";
 const LOCAL_MOVIE_API = "http://localhost:4000/api/movies";
-const LOCAL_USERS_API = "http://localhost:4000/api/users/likes";
+const LOCAL_USERS_LIKES_API = "http://localhost:4000/api/users/likes";
+const LOCAL_USERS_API = "http://localhost:4000/api/users";
 
 export const fullTextSearch = async (movieName) => {
   const response = await axios.get(
@@ -40,18 +41,25 @@ export const decreaseLikes = async (imdbID) => {
 };
 export const updateUserLikes = async (userID, movieID) => {
   console.log(userID)
-  const response = await axios.put(`${LOCAL_USERS_API}/${userID}`, { movieId: movieID });
+  const response = await axios.put(`${LOCAL_USERS_LIKES_API}/${userID}`, { movieId: movieID });
   return response.data;
 };
 
 export const removeUserLikes = async (userID, movieID) => {
   console.log(userID)
-  const response = await axios.put(`${LOCAL_USERS_API}/remove/${userID}`, { movieId: movieID });
+  const response = await axios.put(`${LOCAL_USERS_LIKES_API}/remove/${userID}`, { movieId: movieID });
   return response.data;
 };
 
+export const fetchAllUsers = async () => {
+  const response = await axios.get(`${LOCAL_USERS_API}`);
+  return response.data;
+}
 
-
+export const findUser = async (userID) => {
+  const response = await axios.get(`${LOCAL_USERS_API}/${userID}`);
+  return response.data;
+}
 // export const fetchTracksByAlbumId = async (albumId) => {
 //   const response = await axios.get(
 //     `${NAPSTER_API}/albums/${albumId}/tracks?apikey=${KEY}`
