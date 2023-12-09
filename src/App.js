@@ -106,7 +106,7 @@ function App() {
     <HashRouter>
       <div className="row">
         <div className="col-12">
-          <NavBar />
+          <NavBar isLoggedIn={isLoggedIn} />
           <Routes>
             <Route path='/'
               element={<HomeMain
@@ -158,17 +158,17 @@ function App() {
               path="/signin"
               element={<Signin onLogin={handleLogin} />}
             />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/search" element={<MovieList />} />
-          <Route path="/details/:imdbId" element={<MovieDetails />} />
-          <Route path="/account" element={<Account onLogout={handleLogout} onSignIn={handleUser} />} />
-          <Route path="/account/:id" element={<Account />} />
-          <Route path="/admin/users" element={<UserTable />} />
-          <Route path="/editProfile/:username" element={<EditProfile />} />
-          <Route path="/profile/:username" element={<Profile user={allUser} onSignIn={handleUser} isLoggedIn={isLoggedIn}/>} />
-        </Routes>
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/search" element={<MovieList />} />
+            <Route path="/details/:imdbId" element={<MovieDetails user={user} isLoggedIn={isLoggedIn} />} />
+            <Route path="/account" element={<Account onLogout={handleLogout} onSignIn={handleUser} />} />
+            <Route path="/account/:id" element={<Account />} />
+            <Route path="/admin/users" element={<UserTable />} />
+            <Route path="/editProfile/:username" element={<EditProfile />} />
+            <Route path="/profile/:username" element={<Profile user={allUser} onSignIn={handleUser} isLoggedIn={handleLogin} />} />
+          </Routes>
+        </div>
       </div>
-    </div>
     </HashRouter>
 
   );
