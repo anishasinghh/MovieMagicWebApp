@@ -15,6 +15,7 @@ function MovieDetails({ user, isLoggedIn, users }) {
     const { imdbId } = useParams();
 
     useEffect(() => {
+        console.log("in use effect")
         // setUsersLiked([]);
         fetchMovieDetailsById(imdbId);
         // fetchMovieByIMDB(imdbId);
@@ -43,31 +44,17 @@ function MovieDetails({ user, isLoggedIn, users }) {
     };
 
 
-    // // for local api 
-    // const fetchMovieByIMDB = async (imdbId) => {
-    //     const response2 = await client.fetchMovieByIMDB(imdbId);
-    //     setCurrentMovie(response2);
-    //     if (response2 && response2.likes !== undefined) {
-    //         setLikes(response2.likes);
-    //     } else {
-    //         setLikes("NA");
-    //     }
-    //     for (const userObj of users) {
-    //         if (userObj.liked_movies.includes(response2.id) && !usersLiked.some(u => u._id === userObj._id)) {
-    //             setUsersLiked(prevUsersLiked => [...prevUsersLiked, userObj]);
-    //         }
-    //     }
-    //     // handleLikes();
-    // };
-
     const handleLikeClick = async () => {
         if (isLoggedIn) {
-            if (!isLiked) {
+            if (!isLiked && !(user.liked_movies.includes(currentMovie.id))) {
                 // If the movie is not liked, increase likes
                 const updatedMovie = await client.increaseLikes(imdbId);
                 setCurrentMovie(updatedMovie);
                 setLikes(updatedMovie.likes);
                 await client.updateUserLikes(user._id, updatedMovie.id)
+
+                setUsersLiked(prevusersLiked => [...prevusersLiked, user]);
+                setIsLiked(true);
 
             } else {
                 // If the movie is liked, decrease likes
@@ -75,8 +62,10 @@ function MovieDetails({ user, isLoggedIn, users }) {
                 setCurrentMovie(updatedMovie);
                 setLikes(updatedMovie.likes);
                 await client.removeUserLikes(user._id, updatedMovie.id)
+
+                setUsersLiked(prevusersLiked => prevusersLiked.filter(u => u._id !== user._id));
+                setIsLiked(false);
             }
-            setIsLiked(!isLiked); // Toggle the like status after the action
         } else {
             alert('Please log in to like this movie.');
         }
@@ -93,10 +82,10 @@ function MovieDetails({ user, isLoggedIn, users }) {
                     {(user.role === "USER" || !isLoggedIn) && (
                         <div className="text-center mt-3">
                             <button
-                                className={`btn ${isLiked ? 'btn-danger' : 'btn-outline-danger'}`}
+                                className={`btn ${isLiked || user.liked_movies.includes(currentMovie.id) ? 'btn-danger' : 'btn-outline-danger'}`}
                                 onClick={handleLikeClick}
                             >
-                                {isLiked ? <FaHeart /> : <CiHeart />}
+                                {isLiked || user.liked_movies.includes(currentMovie.id) ? <FaHeart /> : <CiHeart />}
                             </button>
                         </div>
                     )}

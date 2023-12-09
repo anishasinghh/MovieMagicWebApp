@@ -88,6 +88,7 @@ function App() {
     setMovies(response.data);
   };
   useEffect(() => {
+    console.log("in use effect find all movies")
     findAllMovies();
   }, []);
 
