@@ -62,7 +62,8 @@ function App() {
   const USERS2_URL = `${API_BASE}/api/USERusers`
 
   const findAllUsers = async () => {
-    console.log(USERS_URL);
+    console.log("in findAllUsers in app");
+    // console.log(USERS_URL);
     const response = await axios.get(USERS_URL);
     setAllUsers(response.data);
 
