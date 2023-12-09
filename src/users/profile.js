@@ -47,14 +47,14 @@ function Profile({ user, isLoggedIn }) {
   return (
     <div>
       <h1 style={{ color: "white" }}>{profile.username}'s Profile</h1>
-      <h1>{profile.firstName}</h1>
-      <h2>{profile.username}</h2>
-      <h2>{profile.email}</h2>
-      <h2>{profile.role}</h2>
+      <h1  style={{ color: "white" }}>{profile.firstName}</h1>
+      <h2  style={{ color: "white" }}>{profile.username}</h2>
+      <h2  style={{ color: "white" }}>{profile.email}</h2>
+      <h2  style={{ color: "white" }}>{profile.role}</h2>
 
       <div>
-        <h2>Followers:</h2>
-        <ul>
+        <h2  style={{ color: "white" }}>Followers:</h2>
+        <ul  style={{ color: "white" }}>
           {profile.followers.map((follower, index) => (
             <li key={index}>
               <Link to={`/profile/${follower}`}>{follower}</Link>
@@ -64,8 +64,8 @@ function Profile({ user, isLoggedIn }) {
       </div>
 
       <div>
-        <h2>Following:</h2>
-        <ul>
+        <h2  style={{ color: "white" }}>Following:</h2>
+        <ul  style={{ color: "white" }}>
           {profile.following.map((following, index) => (
             <li key={index}>
               <Link to={`/profile/${following}`}>{following}</Link>
@@ -73,9 +73,9 @@ function Profile({ user, isLoggedIn }) {
           ))}
         </ul>
       </div>
-      <h2>{currentUser.firstName}</h2>
-      <h2>{currentUser.username}</h2>
-      <h2>{profile.username}</h2>
+      <h2  style={{ color: "white" }}>{currentUser.firstName}</h2>
+      <h2  style={{ color: "white" }}>{currentUser.username}</h2>
+      <h2  style={{ color: "white" }}> {profile.username}</h2>
       <div>
         {currentUser.firstName !== profile.firstName && (
           <div>
@@ -85,11 +85,11 @@ function Profile({ user, isLoggedIn }) {
           </div>
         )}
       </div>
-      <h2>
+      <h2  style={{ color: "white" }}>
         {currentUser.role}
       </h2>
       {currentUser.role === "ADMIN" && (
-        <div className="text-center mt-3">
+        <div  style={{ color: "white" }}>
           <Link to="/admin/users" className="btn btn-warning ">
             Manage Users
           </Link>
@@ -97,7 +97,7 @@ function Profile({ user, isLoggedIn }) {
       )}
 
       {currentUser.firstName === profile.firstName &&  (
-        <div>
+        <div  style={{ color: "white" }}>
         <Link to={`/editProfile/${currentUser.username}`}>
           <button className = "btn btn-secondary">Edit Profile</button>
         </Link>
