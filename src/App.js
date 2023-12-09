@@ -71,7 +71,8 @@ function App() {
   const USERS2_URL = `${API_BASE}/api/USERusers`
 
   const findAllUsers = async () => {
-    console.log(USERS_URL);
+    console.log("in findAllUsers in app");
+    // console.log(USERS_URL);
     const response = await axios.get(USERS_URL);
     setAllUsers(response.data);
 
@@ -97,6 +98,7 @@ function App() {
     setMovies(response.data);
   };
   useEffect(() => {
+    console.log("in use effect find all movies")
     findAllMovies();
   }, []);
 
@@ -111,7 +113,7 @@ function App() {
     <HashRouter>
       <div className="row">
         <div className="col-12">
-          <NavBar />
+          <NavBar isLoggedIn={isLoggedIn} />
           <Routes>
             <Route path='/'
               element={<HomeMain
@@ -174,7 +176,6 @@ function App() {
           
         </Routes>
       </div>
-    </div>
     </HashRouter>
 
   );
