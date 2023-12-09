@@ -56,22 +56,23 @@ export const signout = async () => {
   return response.data;
 };
 
-export const addFollowing = async (usernameToAdd, currentUser) => {
-  console.log(usernameToAdd)
-    console.log(currentUser)
+export const addFollowing = async (usernameToFollow, currentUserName) => {
   try {
-    
-    const response = await axios.post(`${USERS_API}/profile/addFollowing`, {
-      usernameToAdd, currentUser,
-    });
-    console.log('client added following');
-
-    return response.data;
+    const response = await request.put(`${USERS_API}/profile/addFollowing/${usernameToFollow}/${currentUserName}`);
+    return response.data; // You can return data received from the server if needed
   } catch (error) {
-    console.log("error found")
-    throw error;
+    throw error; // Handle errors or return a default value based on your requirements
   }
 };
+
+// export const removeFollowing = async (usernameToRemove, currentUserName) => {
+//   try {
+//     const response = await request.put(`${USERS_API}/profile/removeFollowing/${usernameToRemove}/${currentUserName}`);
+//     return response.data;
+//   } catch (error) {
+//     throw error;
+//   }
+// };
 
 
 

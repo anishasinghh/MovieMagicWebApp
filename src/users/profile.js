@@ -18,15 +18,15 @@ function Profile({ user, isLoggedIn }) {
     console.log(currentUser);
   };
 
-  const handleFollowButtonClick = async (usernameToAdd, currentUser) => {
+  const handleFollowButtonClick = async (usernameToAdd, currentUserName) => {
     try {
-      await client.addFollowing(usernameToAdd, currentUser);
+      await client.addFollowing(usernameToAdd, currentUserName);
       console.log('added follower')
       // Optionally, update the state or trigger a re-fetch of the user profile 
     } catch (error) {
-      console.error('Error following user:', error);
+      console.error('Error following user on:', error);
       console.log(usernameToAdd)
-      console.log(currentUser)
+      console.log(currentUserName)
 
     }
   };
@@ -66,11 +66,17 @@ function Profile({ user, isLoggedIn }) {
           ))}
         </ul>
       </div>
-
+      <h2>{currentUser.firstName}</h2>
+      <h2>{currentUser.username}</h2>
+      <h2>{profile.username}</h2>
       <div>
-        <button onClick={() => handleFollowButtonClick(profile.username, currentUser)}>
-          Follow
-        </button>
+      {currentUser.firstName !== profile.firstName && (
+        <div>
+          <button onClick={() => handleFollowButtonClick(profile.username, currentUser.username)}>
+            Follow
+          </button>
+        </div>
+      )}
       </div>
       <h2>
         {currentUser.role}
