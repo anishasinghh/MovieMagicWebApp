@@ -17,18 +17,25 @@ import HomeUser from './homeUser/homeUser';
 import HomeMain from './homeMain';
 import Profile from './users/profile';
 import EditProfile from './users/editProfile';
+import * as client from "./users/client";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({ username: "username", firstname: "first", followers: [], following: [], role: "" });
+
+  const findCurrentUser = async () => {
+    const current = await client.account();
+    setCurrentUser(current);
+  };
 
   const handleLogin = () => {
     setIsLoggedIn(true);
+    // findCurrentUser();
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
   };
-
 
   const [movie, setMovie] = useState({
     title: "New Movie", likes: "New Number",
@@ -165,7 +172,8 @@ function App() {
             <Route path="/account/:id" element={<Account />} />
             <Route path="/admin/users" element={<UserTable />} />
             <Route path="/editProfile/:username" element={<EditProfile />} />
-            <Route path="/profile/:username" element={<Profile user={allUser} onSignIn={handleUser} isLoggedIn={handleLogin} />} />
+            <Route path="/profile/:username" element={<Profile onSignIn={handleUser} isLoggedIn={handleLogin} onLogout={handleLogout} />} />
+
           </Routes>
         </div>
       </div>

@@ -92,7 +92,7 @@ function MovieDetails({ user, isLoggedIn }) {
                         <h1 className="fw-light mb-3">{movieDetail.Title}</h1>
                         <img src={movieDetail.Poster} alt={movieDetail.Title} />
                     </div>
-                    {console.log(user)};
+                    {console.log(user)}
                     {(user.role === "USER" || !isLoggedIn) && (
                         <div className="text-center mt-3">
                             <button
