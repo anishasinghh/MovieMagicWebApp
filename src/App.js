@@ -15,6 +15,8 @@ import { useState } from "react";
 import Home from './home/home';
 import HomeUser from './homeUser/homeUser';
 import HomeMain from './homeMain';
+import Profile from './users/profile';
+import EditProfile from './users/editProfile';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -156,15 +158,17 @@ function App() {
               path="/signin"
               element={<Signin onLogin={handleLogin} />}
             />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/search" element={<MovieList />} />
-            <Route path="/details/:imdbId" element={<MovieDetails user={allUser} isLoggedIn={isLoggedIn} users={users} />} />
-            <Route path="/account" element={<Account onLogout={handleLogout} onSignIn={handleUser} />} />
-            <Route path="/account/:id" element={<Account />} />
-            <Route path="/admin/users" element={<UserTable />} />
-          </Routes>
-        </div>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/search" element={<MovieList />} />
+          <Route path="/details/:imdbId" element={<MovieDetails />} />
+          <Route path="/account" element={<Account onLogout={handleLogout} onSignIn={handleUser} />} />
+          <Route path="/account/:id" element={<Account />} />
+          <Route path="/admin/users" element={<UserTable />} />
+          <Route path="/editProfile/:username" element={<EditProfile />} />
+          <Route path="/profile/:username" element={<Profile user={allUser} onSignIn={handleUser} isLoggedIn={isLoggedIn}/>} />
+        </Routes>
       </div>
+    </div>
     </HashRouter>
 
   );
