@@ -4,6 +4,8 @@ import HomeUser from "./homeUser/homeUser";
 import Home from "./home/home";
 
 function HomeMain({ isLoggedIn, user, movies, movie, setMovie, users, setUser }) {
+  console.log(isLoggedIn);
+  console.log(user);
     if (isLoggedIn) {
       if (user.role === "ADMIN") {
           console.log(user);

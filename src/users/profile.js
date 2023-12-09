@@ -1,12 +1,15 @@
 import * as client from "./client";
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function Profile({ user, isLoggedIn }) {
+function Profile({ user, isLoggedIn, onLogout, onSignIn }) {
   const { username } = useParams();
   const [profile, setProfile] = useState({ username: "username", firstname: "first", followers: [], following: [], role: "" });
   const [currentUser, setCurrentUser] = useState({ username: "username", firstname: "first", followers: [], following: [], role: "" });
+  const navigate = useNavigate();
+
 
   const findUserByUsername = async (username) => {
     console.log(username);
@@ -14,8 +17,9 @@ function Profile({ user, isLoggedIn }) {
     setProfile(foundUser);
     const current = await client.account();
     setCurrentUser(current);
-    console.log(foundUser)
+    // console.log(foundUser)
     console.log(currentUser);
+    onSignIn(current);
   };
 
   const handleFollowButtonClick = async (usernameToAdd, currentUserName) => {
@@ -38,11 +42,22 @@ function Profile({ user, isLoggedIn }) {
     }
   };
 
+  const signout = async () => {
+    console.log(currentUser);
+    await client.signout();
+    onLogout();
+    setCurrentUser({ username: "username", firstname: "first", followers: [], following: [], role: "" })
+    console.log(currentUser);
+    navigate("/signin");
+  };
+
   useEffect(() => {
     if (username) {
       findUserByUsername(username);
     }
   }, [username]);
+
+
 
   return (
     <div>
@@ -103,6 +118,12 @@ function Profile({ user, isLoggedIn }) {
         </Link>
       </div>
       )}
+
+      <div>
+        <button onClick={signout}>
+          Sign Out
+        </button>
+      </div>
 
     </div>
   )
