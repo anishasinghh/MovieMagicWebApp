@@ -96,6 +96,14 @@ function Profile({ user, isLoggedIn }) {
         </div>
       )}
 
+      {currentUser.firstName === profile.firstName &&  (
+        <div>
+        <Link to={`/editProfile/${currentUser.username}`}>
+          <button className = "btn btn-secondary">Edit Profile</button>
+        </Link>
+      </div>
+      )}
+
     </div>
   )
 }

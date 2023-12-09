@@ -16,6 +16,7 @@ import Home from './home/home';
 import HomeUser from './homeUser/homeUser';
 import HomeMain from './homeMain';
 import Profile from './users/profile';
+import EditProfile from './users/editProfile';
 
 function App() { 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -144,6 +145,7 @@ function App() {
           <Route path="/account" element={<Account onLogout={handleLogout} onSignIn={handleUser} />} />
           <Route path="/account/:id" element={<Account />} />
           <Route path="/admin/users" element={<UserTable />} />
+          <Route path="/editProfile/:username" element={<EditProfile />} />
           <Route path="/profile/:username" element={<Profile user={allUser} onSignIn={handleUser} isLoggedIn={isLoggedIn}/>} />
         </Routes>
       </div>
