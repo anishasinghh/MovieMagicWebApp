@@ -52,6 +52,7 @@ function Profile({ onLogout, onSignIn }) {
   };
 
   useEffect(() => {
+    isLoggedIn();
     if (username) {
       findUserByUsername(username);
     }
@@ -62,14 +63,14 @@ function Profile({ onLogout, onSignIn }) {
   return (
     <div>
       <h1 style={{ color: "white" }}>{profile.username}'s Profile</h1>
-      <h1  style={{ color: "white" }}>{profile.firstName}</h1>
-      <h2  style={{ color: "white" }}>{profile.username}</h2>
-      <h2  style={{ color: "white" }}>{profile.email}</h2>
-      <h2  style={{ color: "white" }}>{profile.role}</h2>
+      <h1 style={{ color: "white" }}>{profile.firstName}</h1>
+      <h2 style={{ color: "white" }}>{profile.username}</h2>
+      <h2 style={{ color: "white" }}>{profile.email}</h2>
+      <h2 style={{ color: "white" }}>{profile.role}</h2>
 
       <div>
-        <h2  style={{ color: "white" }}>Followers:</h2>
-        <ul  style={{ color: "white" }}>
+        <h2 style={{ color: "white" }}>Followers:</h2>
+        <ul style={{ color: "white" }}>
           {profile.followers.map((follower, index) => (
             <li key={index}>
               <Link to={`/profile/${follower}`}>{follower}</Link>
@@ -79,8 +80,8 @@ function Profile({ onLogout, onSignIn }) {
       </div>
 
       <div>
-        <h2  style={{ color: "white" }}>Following:</h2>
-        <ul  style={{ color: "white" }}>
+        <h2 style={{ color: "white" }}>Following:</h2>
+        <ul style={{ color: "white" }}>
           {profile.following.map((following, index) => (
             <li key={index}>
               <Link to={`/profile/${following}`}>{following}</Link>
@@ -88,9 +89,9 @@ function Profile({ onLogout, onSignIn }) {
           ))}
         </ul>
       </div>
-      <h2  style={{ color: "white" }}>{currentUser.firstName}</h2>
-      <h2  style={{ color: "white" }}>{currentUser.username}</h2>
-      <h2  style={{ color: "white" }}> {profile.username}</h2>
+      <h2 style={{ color: "white" }}>{currentUser.firstName}</h2>
+      <h2 style={{ color: "white" }}>{currentUser.username}</h2>
+      <h2 style={{ color: "white" }}> {profile.username}</h2>
       <div>
         {currentUser.firstName !== profile.firstName && (
           <div>
@@ -100,23 +101,23 @@ function Profile({ onLogout, onSignIn }) {
           </div>
         )}
       </div>
-      <h2  style={{ color: "white" }}>
+      <h2 style={{ color: "white" }}>
         {currentUser.role}
       </h2>
       {currentUser.role === "ADMIN" && (
-        <div  style={{ color: "white" }}>
+        <div style={{ color: "white" }}>
           <Link to="/admin/users" className="btn btn-warning ">
             Manage Users
           </Link>
         </div>
       )}
 
-      {currentUser.firstName === profile.firstName &&  (
-        <div  style={{ color: "white" }}>
-        <Link to={`/editProfile/${currentUser.username}`}>
-          <button className = "btn btn-secondary">Edit Profile</button>
-        </Link>
-      </div>
+      {currentUser.firstName === profile.firstName && (
+        <div style={{ color: "white" }}>
+          <Link to={`/editProfile/${currentUser.username}`}>
+            <button className="btn btn-secondary">Edit Profile</button>
+          </Link>
+        </div>
       )}
 
       <div>

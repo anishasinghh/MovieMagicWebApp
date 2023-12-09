@@ -71,7 +71,8 @@ function App() {
   const USERS2_URL = `${API_BASE}/api/USERusers`
 
   const findAllUsers = async () => {
-    console.log(USERS_URL);
+    console.log("in findAllUsers in app");
+    // console.log(USERS_URL);
     const response = await axios.get(USERS_URL);
     setAllUsers(response.data);
 
@@ -97,6 +98,7 @@ function App() {
     setMovies(response.data);
   };
   useEffect(() => {
+    console.log("in use effect find all movies")
     findAllMovies();
   }, []);
 
@@ -111,7 +113,7 @@ function App() {
     <HashRouter>
       <div className="row">
         <div className="col-12">
-          <NavBar />
+          <NavBar isLoggedIn={isLoggedIn} />
           <Routes>
             <Route path='/'
               element={<HomeMain
@@ -163,19 +165,21 @@ function App() {
               path="/signin"
               element={<Signin onLogin={handleLogin} />}
             />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<Signup onLogin={handleLogin}/>} />
           <Route path="/search" element={<MovieList />} />
-          <Route path="/details/:imdbId" element={<MovieDetails user={user} isLoggedIn={isLoggedIn}/>} />
+          <Route path="/details/:imdbId" element={<MovieDetails user={allUser} isLoggedIn={isLoggedIn}/>} />
           <Route path="/account" element={<Account onLogout={handleLogout} onSignIn={handleUser} />} />
           <Route path="/account/:id" element={<Account />} />
           <Route path="/admin/users" element={<UserTable />} />
           <Route path="/editProfile/:username" element={<EditProfile />} />
-          <Route path="/profile/:username" element={<Profile onSignIn={handleUser} onLogout={handleLogout}/>} />
+          <Route path="/profile/:username" element={<Profile onSignIn={handleUser} isLoggedIn={handleLogin} onLogout={handleLogout}/>} />
           
         </Routes>
       </div>
-    </div>
+      </div>
     </HashRouter>
+    
+
 
   );
 

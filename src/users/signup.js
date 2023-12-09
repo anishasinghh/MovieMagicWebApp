@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as client from "./client";
 import "./signin.css";
-function Signup() {
+function Signup({onLogin}) {
   const [error, setError] = useState("");
   const [credentials, setCredentials] = useState({
     username: "", password: "", firstName: "", lastName: "", email: "", dob: ""
@@ -11,7 +11,9 @@ function Signup() {
   const signup = async () => {
     try {
       await client.signup(credentials);
-      navigate("/account");
+    const username = credentials.username;
+    onLogin();
+    navigate(`/profile/${username}`);
     } catch (err) {
       setError(err.response.data.message);
     }
