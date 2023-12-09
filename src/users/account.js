@@ -20,7 +20,6 @@ function Account({ onLogout, onSignIn }) {
     const account = await client.account();
     setAccount(account);
     onSignIn(account);
-    
   };
   const signout = async () => {
     await client.signout();
