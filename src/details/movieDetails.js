@@ -94,6 +94,7 @@ function MovieDetails({ user, isLoggedIn }) {
                     </div>
                     {console.log(user)}
                     {(user.role === "USER" || !isLoggedIn) && (
+                       
                         <div className="text-center mt-3">
                             <button
                                 className={`btn ${isLiked || user.liked_movies.includes(currentMovie.id) ? 'btn-danger' : 'btn-outline-danger'}`}
