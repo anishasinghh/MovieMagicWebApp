@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 import './App.css';
-import {HashRouter} from "react-router-dom";
-import {Routes, Route, Navigate} from "react-router";
+import { HashRouter } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router";
 import Signin from './users/signin';
 import Signup from './users/signup';
 import Account from './users/account';
@@ -18,7 +18,7 @@ import HomeMain from './homeMain';
 import Profile from './users/profile';
 import EditProfile from './users/editProfile';
 
-function App() { 
+function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = () => {
@@ -29,11 +29,12 @@ function App() {
     setIsLoggedIn(false);
   };
 
- 
+
   const [movie, setMovie] = useState({
-    title: "New Movie",      likes: "New Number",
-    posterUrl: "New URL", id: 0
+    title: "New Movie", likes: "New Number",
+    posterUrl: "New URL", id: 0, imdbID: "",
   });
+
 
   const [movies, setMovies] = useState([]);
 
@@ -53,22 +54,23 @@ function App() {
     setAllUser(allUser);
   };
 
-  const API_BASE = process.env.REACT_APP_BASE_API_URL || "http://localhost:4000/api";
-  
-  
-  const MOVIES_URL = `${API_BASE}/movies`
+  const API_BASE = process.env.REACT_APP_BASE_API_URL || "http://localhost:4000";
 
-  const USERS_URL = `${API_BASE}/users`
 
-  const USERS2_URL = `${API_BASE}/USERusers`
+  const MOVIES_URL = `${API_BASE}/api/movies`
+
+  const USERS_URL = `${API_BASE}/api/users`
+
+  const USERS2_URL = `${API_BASE}/api/USERusers`
 
   const findAllUsers = async () => {
     console.log(USERS_URL);
     const response = await axios.get(USERS_URL);
     setAllUsers(response.data);
-    
-    setIsLoggedIn(true);
+
+    // setIsLoggedIn(true);
   };
+
   useEffect(() => {
     findAllUsers();
   }, []);
@@ -91,17 +93,21 @@ function App() {
     findAllMovies();
   }, []);
 
+  // useEffect(() => {
+  //   findMovieByIMDB();
+  // }, []);
+
+
 
   return (
 
     <HashRouter>
-         <div className="row">
+      <div className="row">
         <div className="col-12">
-        <NavBar/>
-        <Routes>
-        <Route
-              path="/home"
-              element={<HomeMain 
+          <NavBar />
+          <Routes>
+            <Route path='/'
+              element={<HomeMain
                 isLoggedIn={isLoggedIn}
                 user={allUser}
                 movies={movies}
@@ -110,7 +116,18 @@ function App() {
                 users={users}
                 setUser={setUser} />}
             />
-        {/* {isLoggedIn ? (
+            <Route
+              path="/home"
+              element={<HomeMain
+                isLoggedIn={isLoggedIn}
+                user={allUser}
+                movies={movies}
+                movie={movie}
+                setMovie={setMovie}
+                users={users}
+                setUser={setUser} />}
+            />
+            {/* {isLoggedIn ? (
               <Route path="/home" element={<HomeUser
                 movies={movies}
                 movie={movie}
@@ -127,15 +144,15 @@ function App() {
                 user={user}
                 setUser={setUser}/>} />
             )} */}
-        {/* <Route path="/home" element={<Home isLoggedIn={isLoggedIn} handleLogin={handleLogin}
+            {/* <Route path="/home" element={<Home isLoggedIn={isLoggedIn} handleLogin={handleLogin}
               movies={movies}
               movie={movie}
               setMovie={setMovie}
               users={users}
               user={user}
               setUser={setUser}/>} /> */}
-          {/* <Route path="/signin" element={<Signin />} /> */}
-          <Route
+            {/* <Route path="/signin" element={<Signin />} /> */}
+            <Route
               path="/signin"
               element={<Signin onLogin={handleLogin} />}
             />
@@ -151,8 +168,8 @@ function App() {
       </div>
     </div>
     </HashRouter>
-    
-);
+
+  );
 
 
 }
