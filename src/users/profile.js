@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function Profile({ user, isLoggedIn }) {
   const { username } = useParams();
   const [profile, setProfile] = useState({ username: "username", firstname: "first", followers: [], following: [], role: "" });
-  const [currentUser, setCurrentUser] =  useState({ username: "username", firstname: "first", followers: [], following: [], role: "" });
+  const [currentUser, setCurrentUser] = useState({ username: "username", firstname: "first", followers: [], following: [], role: "" });
 
   const findUserByUsername = async (username) => {
     console.log(username);
@@ -20,14 +20,21 @@ function Profile({ user, isLoggedIn }) {
 
   const handleFollowButtonClick = async (usernameToAdd, currentUserName) => {
     try {
-      await client.addFollowing(usernameToAdd, currentUserName);
-      console.log('added follower')
-      // Optionally, update the state or trigger a re-fetch of the user profile 
-    } catch (error) {
-      console.error('Error following user on:', error);
-      console.log(usernameToAdd)
-      console.log(currentUserName)
+      // Check if the current user is already following the profile user
+      const isFollowing = profile.followers.includes(currentUserName);
 
+      if (isFollowing) {
+        // If already following, unfollow
+        await client.removeFollowing(usernameToAdd, currentUserName);
+      } else {
+        // If not following, follow
+        await client.addFollowing(usernameToAdd, currentUserName);
+      }
+
+      // Optionally, update the state or trigger a re-fetch of the user profile 
+      findUserByUsername(username);
+    } catch (error) {
+      console.error('Error following/unfollowing user:', error);
     }
   };
 
@@ -48,7 +55,7 @@ function Profile({ user, isLoggedIn }) {
       <div>
         <h2>Followers:</h2>
         <ul>
-        {profile.followers.map((follower, index) => (
+          {profile.followers.map((follower, index) => (
             <li key={index}>
               <Link to={`/profile/${follower}`}>{follower}</Link>
             </li>
@@ -59,7 +66,7 @@ function Profile({ user, isLoggedIn }) {
       <div>
         <h2>Following:</h2>
         <ul>
-        {profile.following.map((following, index) => (
+          {profile.following.map((following, index) => (
             <li key={index}>
               <Link to={`/profile/${following}`}>{following}</Link>
             </li>
@@ -70,13 +77,13 @@ function Profile({ user, isLoggedIn }) {
       <h2>{currentUser.username}</h2>
       <h2>{profile.username}</h2>
       <div>
-      {currentUser.firstName !== profile.firstName && (
-        <div>
-          <button onClick={() => handleFollowButtonClick(profile.username, currentUser.username)}>
-            Follow
-          </button>
-        </div>
-      )}
+        {currentUser.firstName !== profile.firstName && (
+          <div>
+            <button onClick={() => handleFollowButtonClick(profile.username, currentUser.username)}>
+              {profile.followers.includes(currentUser.username) ? 'Unfollow' : 'Follow'}
+            </button>
+          </div>
+        )}
       </div>
       <h2>
         {currentUser.role}

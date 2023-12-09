@@ -65,14 +65,14 @@ export const addFollowing = async (usernameToFollow, currentUserName) => {
   }
 };
 
-// export const removeFollowing = async (usernameToRemove, currentUserName) => {
-//   try {
-//     const response = await request.put(`${USERS_API}/profile/removeFollowing/${usernameToRemove}/${currentUserName}`);
-//     return response.data;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
+export const removeFollowing = async (usernameToRemove, currentUserName) => {
+  try {
+    const response = await request.put(`${USERS_API}/profile/removeFollowing/${usernameToRemove}/${currentUserName}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 
 
