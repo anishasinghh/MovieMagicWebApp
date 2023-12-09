@@ -170,7 +170,7 @@ function App() {
           <Route path="/account/:id" element={<Account />} />
           <Route path="/admin/users" element={<UserTable />} />
           <Route path="/editProfile/:username" element={<EditProfile />} />
-          <Route path="/profile/:username" element={<Profile onSignIn={handleUser} isLoggedIn={isLoggedIn} onLogout={handleLogout}/>} />
+          <Route path="/profile/:username" element={<Profile onSignIn={handleUser} onLogout={handleLogout}/>} />
           
         </Routes>
       </div>

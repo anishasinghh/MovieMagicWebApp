@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-function Profile({ user, isLoggedIn, onLogout, onSignIn }) {
+function Profile({ onLogout, onSignIn }) {
   const { username } = useParams();
   const [profile, setProfile] = useState({ username: "username", firstname: "first", followers: [], following: [], role: "" });
   const [currentUser, setCurrentUser] = useState({ username: "username", firstname: "first", followers: [], following: [], role: "" });
