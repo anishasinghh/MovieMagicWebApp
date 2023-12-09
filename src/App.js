@@ -163,7 +163,7 @@ function App() {
               path="/signin"
               element={<Signin onLogin={handleLogin} />}
             />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<Signup onLogin={handleLogin}/>} />
           <Route path="/search" element={<MovieList />} />
           <Route path="/details/:imdbId" element={<MovieDetails user={user} isLoggedIn={isLoggedIn}/>} />
           <Route path="/account" element={<Account onLogout={handleLogout} onSignIn={handleUser} />} />
