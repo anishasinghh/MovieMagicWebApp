@@ -26,7 +26,8 @@ function EditProfile() {
 
     try {
       // Send the updated profile details to the server
-      await client.updateUser(profile);
+      await client.updateUserDetail(profile);
+      console.log("user updated");
       // Optionally, redirect to the profile page or update the state
     } catch (error) {
       console.error("Error updating user profile:", error);
