@@ -113,7 +113,7 @@ function App() {
     <HashRouter>
       <div className="row">
         <div className="col-12">
-          <NavBar isLoggedIn={isLoggedIn} />
+        <NavBar isLoggedIn={isLoggedIn} setCurrUser={setCurrentUser} />
           <Routes>
             <Route path='/'
               element={<HomeMain
