@@ -4,6 +4,7 @@ import * as client from "../search/client";
 import "./movieDetails.css";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function MovieDetails({ user, isLoggedIn }) {
     const [movieDetail, setMovieDetail] = useState({});
@@ -138,7 +139,7 @@ function MovieDetails({ user, isLoggedIn }) {
                                         {console.log(usersLiked)}
                                         {usersLiked.map((likedUser, index) => (
                                             <li key={index}>
-                                                {likedUser.firstName} {likedUser.lastName}
+                                                <Link to={`/profile/${likedUser.username}`}>{likedUser.firstName} {likedUser.lastName}</Link>
                                             </li>
                                         ))}
                                     </ul>
