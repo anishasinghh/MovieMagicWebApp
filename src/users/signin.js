@@ -3,11 +3,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./signin.css";
 
-function Signin({ onLogin }) {
+function Signin({ onLogin, setAppCurrentUser }) {
   const [credentials, setCredentials] = useState({ username: "", password: "" });
   const navigate = useNavigate();
   const SignIn = async () => {
-    await client.signin(credentials);
+    const user = await client.signin(credentials);
+    setAppCurrentUser(user);
     const username = credentials.username;
     onLogin();
     navigate(`/profile/${username}`);

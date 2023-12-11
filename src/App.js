@@ -25,6 +25,7 @@ function App() {
 
   const findCurrentUser = async () => {
     const current = await client.account();
+    console.log("app current user: " + current.username);
     setCurrentUser(current);
   };
 
@@ -113,7 +114,7 @@ function App() {
     <HashRouter>
       <div className="row">
         <div className="col-12">
-        <NavBar isLoggedIn={isLoggedIn} setCurrUser={setCurrentUser} />
+          <NavBar isLoggedIn={isLoggedIn} setCurrUser={setCurrentUser} />
           <Routes>
             <Route path='/'
               element={<HomeMain
@@ -163,22 +164,22 @@ function App() {
             {/* <Route path="/signin" element={<Signin />} /> */}
             <Route
               path="/signin"
-              element={<Signin onLogin={handleLogin} />}
+              element={<Signin onLogin={handleLogin} setAppCurrentUser={setCurrentUser} />}
             />
-          <Route path="/signup" element={<Signup onLogin={handleLogin}/>} />
-          <Route path="/search" element={<MovieList />} />
-          <Route path="/details/:imdbId" element={<MovieDetails user={allUser} isLoggedIn={isLoggedIn}/>} />
-          <Route path="/account" element={<Account onLogout={handleLogout} onSignIn={handleUser} />} />
-          <Route path="/account/:id" element={<Account />} />
-          <Route path="/admin/users" element={<UserTable />} />
-          <Route path="/editProfile/:username" element={<EditProfile />} />
-          <Route path="/profile/:username" element={<Profile onSignIn={handleUser} isLoggedIn={handleLogin} onLogout={handleLogout}/>} />
-          
-        </Routes>
-      </div>
+            <Route path="/signup" element={<Signup onLogin={handleLogin} />} />
+            <Route path="/search" element={<MovieList />} />
+            <Route path="/details/:imdbId" element={<MovieDetails appCurrentUser={currentUser} setUser={handleUser} user={allUser} isLoggedIn={isLoggedIn} />} />
+            <Route path="/account" element={<Account onLogout={handleLogout} onSignIn={handleUser} />} />
+            <Route path="/account/:id" element={<Account />} />
+            <Route path="/admin/users" element={<UserTable />} />
+            <Route path="/editProfile/:username" element={<EditProfile />} />
+            <Route path="/profile/:username" element={<Profile onSignIn={handleUser} isLoggedIn={handleLogin} onLogout={handleLogout} />} />
+
+          </Routes>
+        </div>
       </div>
     </HashRouter>
-    
+
 
 
   );
