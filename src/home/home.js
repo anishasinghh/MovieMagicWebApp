@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import './home.css';
+import {Link} from "react-router-dom";
 
 function Home(
     { movies, movie, setMovie, users, user, setUser }
@@ -32,6 +33,12 @@ function Home(
                 <div className="card-body">
                   <h5 className="card-title">{movie.title}</h5>
                   <p className="card-text">Likes: {movie.likes}</p>
+
+                  <button class="btn btn-outline-dark" > 
+                      <Link to={`/details/${movie.imdbID}`} className="dtext">
+                        Details
+                      </Link>
+                       </button>
               
                 </div>
               </div>

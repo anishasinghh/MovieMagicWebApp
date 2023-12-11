@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-function NavBar({ isLoggedIn }) {
+function NavBar({ isLoggedIn, setCurrUser }) {
   const [currentUser, setCurrentUser] = useState({});
   const navigate = useNavigate();
 
@@ -26,6 +26,15 @@ function NavBar({ isLoggedIn }) {
 
   };
 
+  const updateUserWithLikes = async () => {
+    const updatedUser = await client.account();
+    setCurrentUser(updatedUser);
+    console.log(updatedUser)
+    setCurrUser(currentUser);
+    navigate('/home');
+
+  }
+
   return (
     <Navbar expand="lg" className="navbar" fluid>
       <Container className="navbar-container" fluid>
@@ -33,7 +42,10 @@ function NavBar({ isLoggedIn }) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="navbar-nav ms-auto">
-            <Nav.Link as={Link} to="/home" className="nav-link">Home</Nav.Link>
+            {/* <Nav.Link as={Link} to="/home" className="nav-link">Home</Nav.Link> */}
+            {<Nav.Link as={Link} onClick={updateUserWithLikes} className="nav-link">
+              Home</Nav.Link>}
+
             <Nav.Link as={Link} to="/search" className="nav-link">Search</Nav.Link>
             {isLoggedIn && <Nav.Link as={Link} onClick={updateCurrentUser} className="nav-link">
               Profile</Nav.Link>}

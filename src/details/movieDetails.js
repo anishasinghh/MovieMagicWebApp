@@ -6,22 +6,25 @@ import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-function MovieDetails({ user, isLoggedIn }) {
+function MovieDetails({ appCurrentUser, setUser, user, isLoggedIn }) {
     const [movieDetail, setMovieDetail] = useState({});
     const [isLiked, setIsLiked] = useState(false); // State to keep track of like status
     const [currentMovie, setCurrentMovie] = useState({});
     const [likes, setLikes] = useState(null);
     const [usersLiked, setUsersLiked] = useState([]);
-    const [currentUser, setCurrentUser] = useState({});
+    const [currentUser, setCurrentUser] = useState({ username: "username", firstname: "first", liked_movies: [], followers: [], following: [], role: "" });
 
     const { imdbId } = useParams();
 
 
     useEffect(() => {
         console.log("in use effect")
+        console.log("isLoggedIn: " + isLoggedIn);
         setUsersLiked([]);
+        setCurrentUser(user);
         fetchMovieDetailsById(imdbId);
-    }, [imdbId]);
+        // onSignIn(currentUser);
+    }, []);
 
     useEffect(() => {
         console.log("re-rendering usersLiked & likes")
@@ -43,30 +46,48 @@ function MovieDetails({ user, isLoggedIn }) {
         }
 
         const usersResponse = await client.fetchAllUsers();
+        console.log(usersResponse);
+        var currUser = {};
 
-        // const userCurrent = await client.findUser(user._id);
-        // setCurrentUser(userCurrent);
+        console.log("fetchMovieDetailsById appCurrentUser prop: " + appCurrentUser.username);
+        console.log("fetchMovieDetailsById user prop: " + user.username);
 
         for (const userObj of usersResponse) {
             if (userObj.liked_movies.includes(response2.id) && !updatedUsersLiked.some(u => u._id === userObj._id)) {
                 updatedUsersLiked.push(userObj);
+                console.log(updatedUsersLiked);
+            }
+            if (isLoggedIn) {
+                if (userObj.username === user.username) {
+                    currUser = userObj;
+                    setCurrentUser(userObj);
+                    setUser(userObj);
+                }
+            }
+        }
+        setUsersLiked(updatedUsersLiked);
+        console.log("in updatedUserLikes:" + updatedUsersLiked)
+
+        if (isLoggedIn) {
+            if (currUser.liked_movies.includes(response2.id)) {
+                setIsLiked(true);
             }
         }
 
-        setUsersLiked(updatedUsersLiked);
+
     };
 
 
     const handleLikeClick = async () => {
         if (isLoggedIn) {
-            if (!isLiked && !(user.liked_movies.includes(currentMovie.id))) {
+            if (!isLiked && !(currentUser.liked_movies.includes(currentMovie.id))) {
                 // If the movie is not liked, increase likes
                 const updatedMovie = await client.increaseLikes(imdbId);
                 setCurrentMovie(updatedMovie);
                 setLikes(updatedMovie.likes);
-                await client.updateUserLikes(user._id, updatedMovie.id)
+                await client.updateUserLikes(currentUser._id, updatedMovie.id)
 
-                setUsersLiked(prevusersLiked => [...prevusersLiked, user]);
+                setUsersLiked(prevusersLiked => [...prevusersLiked, currentUser]);
                 setIsLiked(true);
                 // refreshUserList();
             } else {
@@ -74,9 +95,9 @@ function MovieDetails({ user, isLoggedIn }) {
                 const updatedMovie = await client.decreaseLikes(imdbId);
                 setCurrentMovie(updatedMovie);
                 setLikes(updatedMovie.likes);
-                await client.removeUserLikes(user._id, updatedMovie.id)
+                await client.removeUserLikes(currentUser._id, updatedMovie.id)
 
-                setUsersLiked(prevusersLiked => prevusersLiked.filter(u => u._id !== user._id));
+                setUsersLiked(prevusersLiked => prevusersLiked.filter(u => u._id !== currentUser._id));
                 setIsLiked(false);
                 // refreshUserList();
             }
@@ -93,16 +114,18 @@ function MovieDetails({ user, isLoggedIn }) {
                         <h1 className="fw-light mb-3">{movieDetail.Title}</h1>
                         <img src={movieDetail.Poster} alt={movieDetail.Title} />
                     </div>
-                    {console.log(user)}
-                    {(user.role === "USER" || !isLoggedIn) && (
+                    {console.log("current user is: " + currentUser.username)}
+                    {console.log("liked movies of current user: " + currentUser.liked_movies)}
+                    {(currentUser.role === "USER" || !isLoggedIn) && (
+
                         <div className="text-center mt-3">
                             <button
-                                className={`btn ${isLiked || user.liked_movies.includes(currentMovie.id) ? 'btn-danger' : 'btn-outline-danger'}`}
+                                className={`btn ${isLiked || currentUser.liked_movies.includes(currentMovie.id) ? 'btn-danger' : 'btn-outline-danger'}`}
                                 onClick={handleLikeClick}
                             >
                                 {console.log("is liked:" + isLiked)}
-                                {console.log("user in liked by" + user.liked_movies.includes(currentMovie.id))}
-                                {isLiked || user.liked_movies.includes(currentMovie.id) ? <FaHeart /> : <CiHeart />}
+                                {console.log("user in liked by" + currentUser.liked_movies.includes(currentMovie.id))}
+                                {isLiked || currentUser.liked_movies.includes(currentMovie.id) ? <FaHeart /> : <CiHeart />}
                             </button>
                         </div>
                     )}
