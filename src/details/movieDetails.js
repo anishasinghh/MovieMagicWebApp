@@ -6,8 +6,7 @@ import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-
-function MovieDetails({ appCurrentUser, setUser, user, isLoggedIn }) {
+function MovieDetails({ setUser, user, isLoggedIn }) {
     const [movieDetail, setMovieDetail] = useState({});
     const [isLiked, setIsLiked] = useState(false); // State to keep track of like status
     const [currentMovie, setCurrentMovie] = useState({});
@@ -90,15 +89,15 @@ function MovieDetails({ appCurrentUser, setUser, user, isLoggedIn }) {
 
                 setUsersLiked(prevusersLiked => [...prevusersLiked, currentUser]);
                 setIsLiked(true);
-                 // Update the liked movie in HomeUser component
-      setUser((prevUser) => ({
-        ...prevUser,
-        liked_movies: isLiked
-          ? prevUser.liked_movies.filter((movieId) => movieId !== currentMovie.id)
-          : [...prevUser.liked_movies, currentMovie.id],
-      }));
-      // Refresh the user's liked movies on the home page
-      fetchMovieDetailsById(imdbId);
+                // Update the liked movie in HomeUser component
+                setUser((prevUser) => ({
+                    ...prevUser,
+                    liked_movies: isLiked
+                        ? prevUser.liked_movies.filter((movieId) => movieId !== currentMovie.id)
+                        : [...prevUser.liked_movies, currentMovie.id],
+                }));
+                // Refresh the user's liked movies on the home page
+                fetchMovieDetailsById(imdbId);
                 // refreshUserList();
             } else {
                 // If the movie is liked, decrease likes

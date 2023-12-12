@@ -23,8 +23,10 @@ import * as client from "./users/client";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState({ username: "username", firstname: "first", followers: [], following: [], role: "", 
-  liked_movies: [] });
+  const [currentUser, setCurrentUser] = useState({
+    username: "username", firstname: "first", followers: [], following: [], role: "",
+    liked_movies: []
+  });
 
   const findCurrentUser = async () => {
     const current = await client.account();
@@ -35,7 +37,7 @@ function App() {
   useEffect(() => {
     findCurrentUser();
   }, []);
-  
+
 
   const handleLogin = () => {
     setIsLoggedIn(true);
@@ -66,11 +68,11 @@ function App() {
 
   const [allUsers, setAllUsers] = useState([]);
 
-  
+
 
   const handleUser = (allUser) => {
     setAllUser(allUser);
-    
+
   };
 
   const API_BASE = process.env.REACT_APP_BASE_API_URL || "http://localhost:4000";
@@ -122,7 +124,7 @@ function App() {
 
   return (
 
-    
+
     <HashRouter>
       <div className="row">
         <div className="col-12">
@@ -178,17 +180,17 @@ function App() {
               path="/signin"
               element={<Signin onLogin={handleLogin} setAppCurrentUser={setCurrentUser} />}
             />
-          <Route path="/signup" element={<Signup onLogin={handleLogin}/>} />
-          <Route path="/search" element={<MovieList />} />
-          <Route path="/details/:imdbId" element={<MovieDetails setUser={handleUser} user={allUser} isLoggedIn={isLoggedIn}/>} />
-          <Route path="/account" element={<Account onLogout={handleLogout} onSignIn={handleUser} />} />
-          <Route path="/account/:id" element={<Account />} />
-          <Route path="/admin/users" element={<UserTable />} />
-          <Route path="/editProfile/:username" element={<EditProfile />} />
-          <Route path="/profile/:username" element={<Profile movies={movies} onSignIn={handleUser} isLoggedIn={handleLogin} onLogout={handleLogout}/>} />
-          
-        </Routes>
-      </div>
+            <Route path="/signup" element={<Signup onLogin={handleLogin} />} />
+            <Route path="/search" element={<MovieList />} />
+            <Route path="/details/:imdbId" element={<MovieDetails setUser={handleUser} user={allUser} isLoggedIn={isLoggedIn} />} />
+            <Route path="/account" element={<Account onLogout={handleLogout} onSignIn={handleUser} />} />
+            <Route path="/account/:id" element={<Account />} />
+            <Route path="/admin/users" element={<UserTable />} />
+            <Route path="/editProfile/:username" element={<EditProfile />} />
+            <Route path="/profile/:username" element={<Profile movies={movies} onSignIn={handleUser} isLoggedIn={handleLogin} onLogout={handleLogout} />} />
+
+          </Routes>
+        </div>
       </div>
     </HashRouter>
 
