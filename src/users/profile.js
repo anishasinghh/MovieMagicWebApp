@@ -12,15 +12,19 @@ function Profile({ movies, onLogout, onSignIn, isLoggedIn }) {
   const navigate = useNavigate();
 
 
+
   const findUserByUsername = async (username) => {
     console.log(username);
     const foundUser = await client.findUserByUsername(username);
     setProfile(foundUser);
+    // setAppCurrentUser(foundUser);
     const current = await client.account();
+    console.log("current username: " + current.username);
     setCurrentUser(current);
     // console.log(foundUser)
     console.log(currentUser);
     onSignIn(current);
+    
   };
 
   const handleFollowButtonClick = async (usernameToAdd, currentUserName) => {
@@ -38,6 +42,7 @@ function Profile({ movies, onLogout, onSignIn, isLoggedIn }) {
 
       // Optionally, update the state or trigger a re-fetch of the user profile 
       findUserByUsername(username);
+      
     } catch (error) {
       console.error('Error following/unfollowing user:', error);
     }

@@ -1,4 +1,7 @@
 import axios from "axios";
+const request = axios.create({
+  withCredentials: true,
+});
 
 const KEY = process.env.OMDB_API_KEY;
 const OMDB_API = "https://www.omdbapi.com";
@@ -56,10 +59,17 @@ export const fetchAllUsers = async () => {
   return response.data;
 }
 
-export const findUser = async (userID) => {
-  const response = await axios.get(`${LOCAL_USERS_API}/${userID}`);
+export const account = async () => {
+  const response = await request.post(`${LOCAL_USERS_API}/account`);
+  console.log(response.data);
   return response.data;
-}
+};
+
+// export const findUser = async (userID) => {
+//   const response = await axios.get(`${LOCAL_USERS_API}/${userID}`);
+//   return response.data;
+// }
+
 // export const fetchTracksByAlbumId = async (albumId) => {
 //   const response = await axios.get(
 //     `${NAPSTER_API}/albums/${albumId}/tracks?apikey=${KEY}`
