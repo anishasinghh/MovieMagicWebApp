@@ -56,7 +56,7 @@ function HomeUser(
                     <img src={likedMovie.posterUrl} className="card-img-top" alt="..." />
                     <div className="card-body">
                       <h5 className="card-title">{likedMovie.title}</h5>
-                      {/* <p className="card-text">Likes: {likedMovie.likes}</p> */}
+                      <p className="card-text">Likes: {likedMovie.likes}</p>
                       <button class="btn btn-outline-dark">
                         <Link to={`/details/${likedMovie.imdbID}`} className="dtext">
                           Details
@@ -91,7 +91,7 @@ function HomeUser(
                 <img src="/images/purple.png" className="card-img-top" alt="..." />
                 <div className="card-body card-user">
                   <h5 className="card-title">{user.username}</h5>
-                  {/* <p className="card-text">{user.followers ? user.followers.length : 0} Followers</p> */}
+                  <p className="card-text">{user.followers ? user.followers.length : 0} Followers</p>
                   <button class="btn btn-outline-dark" > 
                       <Link to={`/profile/${user.username}`} className="dtext">
                         View Profile
