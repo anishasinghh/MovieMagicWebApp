@@ -1,0 +1,92 @@
+/* username */
+.username {
+/* padding-top: 35px; */
+padding-bottom: 35px; 
+padding-top: 30px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 25px;
+line-height: 15px;
+
+/* Faded Purple */
+color: #FFF3FF;
+
+
+
+}
+
+.name{
+    padding-top: 80px;
+/* padding-bottom: 20px;  */
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 60px;
+line-height: 15px;
+
+/* Faded Purple */
+color: #CF9FFF;
+
+}
+
+.edit {
+
+background: #CF9FFF;
+border-radius: 10px;
+margin-top: 80px;
+
+
+font-family: 'Khmer';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 30px;
+
+color: #FFFFFF;
+}
+
+.followerFollowing{
+padding-top: 40px;
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 25px;
+line-height: 12px;
+
+/* Dark Purple */
+color: #CF9FFF;  
+}
+
+.FollowerFollowingHeader {
+    color: #CF9FFF;
+    padding-top: 40px;
+    font-family: 'Inter';
+font-style: normal;
+padding-left: 20px;
+
+}
+
+.FollowerFollowingList {
+    color: #FFF3FF;
+    font-family: 'Inter';
+font-style: normal;
+text-decoration: none;
+padding-left: 20px;
+
+}
+
+.your-lm {
+    margin-bottom: 30px;
+}
+
+.fl {
+    margin-top: 30px;
+}
+
+.dtext {
+    text-decoration: none;
+    color: black;
+}

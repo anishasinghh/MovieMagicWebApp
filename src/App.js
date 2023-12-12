@@ -18,16 +18,26 @@ import HomeMain from './homeMain';
 import Profile from './users/profile';
 import EditProfile from './users/editProfile';
 import * as client from "./users/client";
+// import { Provider } from 'react-redux';
+// import store from './redux/store';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState({ username: "username", firstname: "first", followers: [], following: [], role: "" });
+  const [currentUser, setCurrentUser] = useState({
+    username: "username", firstname: "first", followers: [], following: [], role: "",
+    liked_movies: []
+  });
 
   const findCurrentUser = async () => {
     const current = await client.account();
+    console.log(current);
     console.log("app current user: " + current.username);
     setCurrentUser(current);
   };
+  useEffect(() => {
+    findCurrentUser();
+  }, []);
+
 
   const handleLogin = () => {
     setIsLoggedIn(true);
@@ -58,8 +68,11 @@ function App() {
 
   const [allUsers, setAllUsers] = useState([]);
 
+
+
   const handleUser = (allUser) => {
     setAllUser(allUser);
+
   };
 
   const API_BASE = process.env.REACT_APP_BASE_API_URL || "http://localhost:4000";
@@ -110,6 +123,7 @@ function App() {
 
 
   return (
+
 
     <HashRouter>
       <div className="row">
@@ -173,7 +187,7 @@ function App() {
             <Route path="/account/:id" element={<Account />} />
             <Route path="/admin/users" element={<UserTable />} />
             <Route path="/editProfile/:username" element={<EditProfile />} />
-            <Route path="/profile/:username" element={<Profile onSignIn={handleUser} isLoggedIn={handleLogin} onLogout={handleLogout} />} />
+            <Route path="/profile/:username" element={<Profile movies={movies} onSignIn={handleUser} isLoggedIn={handleLogin} onLogout={handleLogout} />} />
 
           </Routes>
         </div>
