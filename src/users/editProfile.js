@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import * as client from "./client";
+import "./editProfile.css"
 
 function EditProfile() {
   const { username } = useParams();
@@ -41,27 +42,27 @@ function EditProfile() {
 
   return (
     <div>
-      <h1>Edit Profile</h1>
+      <h1 className="heading" >Edit Profile</h1>
       <form onSubmit={handleFormSubmit}>
         <label>
-          Username:
+          Username: 
           <input type="text" name="username" value={profile.username} readOnly />
         </label>
         <br />
         <label>
-          First Name:
+          First Name: 
           <input type="text" name="firstName" value={profile.firstName} onChange={handleInputChange} />
         </label>
         <br />
         <label>
-          Email:
+          Email: 
           <input type="text" name="email" value={profile.email} onChange={handleInputChange} />
         </label>
         <br />
         <button type="submit">Save Changes</button>
       </form>
       <br />
-      <Link to={`/profile/${username}`}>Back to Profile</Link>
+      <Link to={`/profile/${username}`} style={{ textDecoration: 'none', color: '#CF9FFF', fontSize: 20, paddingLeft: 60}}>Back to Profile</Link>
     </div>
   );
 }
