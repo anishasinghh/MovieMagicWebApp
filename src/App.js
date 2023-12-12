@@ -18,8 +18,8 @@ import HomeMain from './homeMain';
 import Profile from './users/profile';
 import EditProfile from './users/editProfile';
 import * as client from "./users/client";
-import { Provider } from 'react-redux';
-import store from './redux/store';
+// import { Provider } from 'react-redux';
+// import store from './redux/store';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -180,7 +180,7 @@ function App() {
             />
           <Route path="/signup" element={<Signup onLogin={handleLogin}/>} />
           <Route path="/search" element={<MovieList />} />
-          <Route path="/details/:imdbId" element={<MovieDetails user={allUser} isLoggedIn={isLoggedIn}/>} />
+          <Route path="/details/:imdbId" element={<MovieDetails setUser={handleUser} user={allUser} isLoggedIn={isLoggedIn}/>} />
           <Route path="/account" element={<Account onLogout={handleLogout} onSignIn={handleUser} />} />
           <Route path="/account/:id" element={<Account />} />
           <Route path="/admin/users" element={<UserTable />} />
@@ -188,6 +188,7 @@ function App() {
           <Route path="/profile/:username" element={<Profile movies={movies} onSignIn={handleUser} isLoggedIn={handleLogin} onLogout={handleLogout}/>} />
           
         </Routes>
+      </div>
       </div>
     </HashRouter>
 
