@@ -168,7 +168,7 @@ function App() {
             />
             <Route path="/signup" element={<Signup onLogin={handleLogin} />} />
             <Route path="/search" element={<MovieList />} />
-            <Route path="/details/:imdbId" element={<MovieDetails appCurrentUser={currentUser} setUser={handleUser} user={allUser} isLoggedIn={isLoggedIn} />} />
+            <Route path="/details/:imdbId" element={<MovieDetails setUser={handleUser} user={allUser} isLoggedIn={isLoggedIn} />} />
             <Route path="/account" element={<Account onLogout={handleLogout} onSignIn={handleUser} />} />
             <Route path="/account/:id" element={<Account />} />
             <Route path="/admin/users" element={<UserTable />} />

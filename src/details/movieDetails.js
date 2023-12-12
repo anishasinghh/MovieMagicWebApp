@@ -6,7 +6,7 @@ import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-function MovieDetails({ appCurrentUser, setUser, user, isLoggedIn }) {
+function MovieDetails({ setUser, user, isLoggedIn }) {
     const [movieDetail, setMovieDetail] = useState({});
     const [isLiked, setIsLiked] = useState(false); // State to keep track of like status
     const [currentMovie, setCurrentMovie] = useState({});
@@ -46,11 +46,11 @@ function MovieDetails({ appCurrentUser, setUser, user, isLoggedIn }) {
         }
 
         const usersResponse = await client.fetchAllUsers();
-        console.log(usersResponse);
+        // console.log(usersResponse);
         var currUser = {};
 
-        console.log("fetchMovieDetailsById appCurrentUser prop: " + appCurrentUser.username);
-        console.log("fetchMovieDetailsById user prop: " + user.username);
+        // console.log("fetchMovieDetailsById appCurrentUser prop: " + appCurrentUser.username);
+        // console.log("fetchMovieDetailsById user prop: " + user.username);
 
         for (const userObj of usersResponse) {
             if (userObj.liked_movies.includes(response2.id) && !updatedUsersLiked.some(u => u._id === userObj._id)) {
