@@ -51,7 +51,7 @@ function NavBar({ isLoggedIn, setCurrUser }) {
 
           </Nav>
           <Nav className="navbar-nav ml-auto">
-            <Nav.Link as={Link} to="/signin" className="nav-link"><button type="button" className="btn btn-outline-light">Sign In</button></Nav.Link>
+          {!isLoggedIn &&<Nav.Link as={Link} to="/signin" className="nav-link"><button type="button" className="btn btn-outline-light">Sign In</button></Nav.Link>}
             <Nav.Link as={Link} to="/signup" className="nav-link"><button type="button" className="btn custom-purple-btn">Sign Up</button></Nav.Link>
           </Nav>
         </Navbar.Collapse>

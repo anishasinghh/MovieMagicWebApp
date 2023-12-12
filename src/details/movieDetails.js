@@ -47,11 +47,11 @@ function MovieDetails({ appCurrentUser, setUser, user, isLoggedIn }) {
         }
 
         const usersResponse = await client.fetchAllUsers();
-        console.log(usersResponse);
+        // console.log(usersResponse);
         var currUser = {};
 
-        console.log("fetchMovieDetailsById appCurrentUser prop: " + appCurrentUser.username);
-        console.log("fetchMovieDetailsById user prop: " + user.username);
+        // console.log("fetchMovieDetailsById appCurrentUser prop: " + appCurrentUser.username);
+        // console.log("fetchMovieDetailsById user prop: " + user.username);
 
         for (const userObj of usersResponse) {
             if (userObj.liked_movies.includes(response2.id) && !updatedUsersLiked.some(u => u._id === userObj._id)) {

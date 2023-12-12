@@ -24,7 +24,7 @@ function Profile({ movies, onLogout, onSignIn, isLoggedIn }) {
     // console.log(foundUser)
     console.log(currentUser);
     onSignIn(current);
-    
+
   };
 
   const handleFollowButtonClick = async (usernameToAdd, currentUserName) => {
@@ -42,7 +42,7 @@ function Profile({ movies, onLogout, onSignIn, isLoggedIn }) {
 
       // Optionally, update the state or trigger a re-fetch of the user profile 
       findUserByUsername(username);
-      
+
     } catch (error) {
       console.error('Error following/unfollowing user:', error);
     }
@@ -72,7 +72,7 @@ function Profile({ movies, onLogout, onSignIn, isLoggedIn }) {
       <div class='col-3'>
         <img className="align-self-end" src="../userIcon.png" alt="..." style={{ width: '275px', height: '275px' }} />
         <div>
-          <h2 className="FollowerFollowingHeader">Followers:</h2>
+          <h2 className="FollowerFollowingHeader">Followers</h2>
           <ul >
             {profile.followers.map((follower, index) => (
               <li key={index}>
@@ -83,7 +83,7 @@ function Profile({ movies, onLogout, onSignIn, isLoggedIn }) {
         </div>
 
         <div>
-          <h2 className="FollowerFollowingHeader">Following:</h2>
+          <h2 className="FollowerFollowingHeader">Following</h2>
           <ul>
             {profile.following.map((following, index) => (
               <li key={index}>
@@ -111,14 +111,14 @@ function Profile({ movies, onLogout, onSignIn, isLoggedIn }) {
               </div>
             )}
           </div>
-          
-            {currentUser.firstName === profile.firstName && (
-              <div className="col-md-2 ">
+
+          {currentUser.firstName === profile.firstName && (
+            <div className="col-md-2 ">
               <button className='edit float-right' onClick={signout}>
                 sign out
               </button>
-              </div>
-            )}
+            </div>
+          )}
           {/* <div className="col-md-1"> */}
           {currentUser.firstName !== profile.firstName && (
             <div className="col-md-2">
@@ -127,19 +127,11 @@ function Profile({ movies, onLogout, onSignIn, isLoggedIn }) {
               </button>
             </div>
           )}
-        {/* </div> */}
-        <div className="col-md-2">
-        {currentUser.role === "ADMIN" && (
-          <div>
-            <Link to="/admin/users" className="btn edit " >
-              Manage Users
-            </Link>
-          </div>
-        )}
-        </div>
+          {/* </div> */}
+
         </div>
         <div className="row">
-          <div className="col-3">
+          <div className="col-4">
             <h2 className="followerFollowing">{profile.followers.length} Followers</h2>
           </div>
           <div className="col-4">
@@ -147,91 +139,64 @@ function Profile({ movies, onLogout, onSignIn, isLoggedIn }) {
           </div>
         </div>
         <h2 className="username">{profile.username}</h2>
-
-        <div className="container-fluid">
-          <div className="row row-title">
-            <div className="col-12 top-title">
-              <hr className="top-line" />
-              <h3 className="your-lm">Your Liked Movies</h3>
-
-
-            </div>
+        {currentUser.role === "ADMIN" && (
+          <div className="col-md-3">
+            <Link to="/admin/users" className="manage" >
+              manage users
+            </Link>
           </div>
-          <div className="row row-dashboard flex-row flex-wrap d-flex">
-            {profile.liked_movies.map((likedMovieId) => {
-              const likedMovie = movies.find((movie) => movie.id === likedMovieId);
+        )}
+        {(profile.followers.includes(currentUser.username) || (profile.username === currentUser.username)) && (
 
-              if (likedMovie) {
-                return (
-                  <div key={likedMovie._id} className="col-12 col-md-6 col-xl-3">
-                    <div className="card" style={{ width: "18rem" }}>
-                      <img src={likedMovie.posterUrl} className="card-img-top" alt="..." />
-                      <div className="card-body">
-                        <h5 className="card-title">{likedMovie.title}</h5>
-                        <p className="card-text">Likes: {likedMovie.likes}</p>
-
-                        <button class="btn btn-outline-dark" >
-                          <Link to={`/details/${likedMovie.imdbID}`} className="dtext">
-                            Details
-                          </Link>
-                        </button>
-
-
-                      </div>
-                    </div>
-                  </div>
-                );
-              }
-              return null;
-            })}
-          </div>
 
           <div className="container-fluid">
-          <div className="row row-title">
-            <div className="col-12 top-title">
-              <hr className="top-line" />
-              <h3 className="your-lm">Your Most Re-Watched Movies</h3>
+            <div className="row row-title">
+              <div className="col-12 top-title">
+                <hr className="top-line" />
+                <h3 className="your-lm">Liked Movies</h3>
 
 
+              </div>
             </div>
-          </div>
-          <div className="row row-dashboard flex-row flex-wrap d-flex">
-            {profile.rewatched_movies.map((likedMovieId) => {
-              const likedMovie = movies.find((movie) => movie.id === likedMovieId);
+            <div className="row row-dashboard flex-row flex-wrap d-flex">
+              {profile.liked_movies.map((likedMovieId) => {
+                const likedMovie = movies.find((movie) => movie.id === likedMovieId);
 
-              if (likedMovie) {
-                return (
-                  <div key={likedMovie._id} className="col-12 col-md-6 col-xl-3">
-                    <div className="card" style={{ width: "18rem" }}>
-                      <img src={likedMovie.posterUrl} className="card-img-top" alt="..." />
-                      <div className="card-body">
-                        <h5 className="card-title">{likedMovie.title}</h5>
-                        <p className="card-text">Likes: {likedMovie.likes}</p>
+                if (likedMovie) {
+                  return (
+                    <div key={likedMovie._id} className="col-12 col-md-6 col-xl-3">
+                      <div className="card" style={{ width: "18rem" }}>
+                        <img src={likedMovie.posterUrl} className="card-img-top" alt="..." />
+                        <div className="card-body">
+                          <h5 className="card-title">{likedMovie.title}</h5>
+                          <p className="card-text">Likes: {likedMovie.likes}</p>
 
-                        <button class="btn btn-outline-dark" >
-                          <Link to={`/details/${likedMovie.imdbID}`} className="dtext">
-                            Details
-                          </Link>
-                        </button>
+                          <button class="btn btn-outline-dark" >
+                            <Link to={`/details/${likedMovie.imdbID}`} className="dtext">
+                              Details
+                            </Link>
+                          </button>
 
 
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              }
-              return null;
-            })}
+                  );
+                }
+                return null;
+              })}
+            </div>
           </div>
-        </div>
-        </div>
+        )}
+
+
         <div>
         </div>
-</div>
+      </div>
 
 
 
-        {/* <div>
+      {/* <div>
           <h2 style={{ color: "white" }}>Followers:</h2>
           <ul style={{ color: "white" }}>
             {profile.followers.map((follower, index) => (
@@ -285,11 +250,11 @@ function Profile({ movies, onLogout, onSignIn, isLoggedIn }) {
 
        
         */}
-      </div >
-      )
+    </div >
+  )
 }
 
-      export default Profile
+export default Profile
 
 
 
