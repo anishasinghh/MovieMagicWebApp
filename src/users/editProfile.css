@@ -1,6 +1,6 @@
 /* styles.css */
 .heading {
-  font-family: 'Inter';
+  /* font-family: 'Inter'; */
   font-style: normal;
   color: #CF9FFF;
   margin-left: 20px;
@@ -20,7 +20,7 @@ label {
   padding-right: 20px;
   color: #FFF3FF;
 
-  font-family: 'Inter';
+  /* font-family: 'Inter'; */
   font-style: normal;
 }
 
