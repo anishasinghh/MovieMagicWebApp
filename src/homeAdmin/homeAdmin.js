@@ -34,6 +34,11 @@ function HomeAdmin (
               <div className="card-body card-user">
                 <h5 className="card-title">{user.username}</h5>
                 <p className="card-text">{user.followers ? user.followers.length : 0} Followers</p>
+                <button class="btn btn-outline-dark" > 
+                      <Link to={`/profile/${user.username}`} className="dtext">
+                        View Profile
+                      </Link>
+                       </button>
               </div>
             </div>
           </div>

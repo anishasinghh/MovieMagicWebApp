@@ -11,6 +11,7 @@ function Profile({ isLoggedIn, onLogout, onSignIn }) {
   const navigate = useNavigate();
 
 
+
   const findUserByUsername = async (username) => {
     console.log(username);
     const foundUser = await client.findUserByUsername(username);
@@ -22,6 +23,7 @@ function Profile({ isLoggedIn, onLogout, onSignIn }) {
     // console.log(foundUser)
     console.log(currentUser);
     onSignIn(current);
+    
   };
 
   const handleFollowButtonClick = async (usernameToAdd, currentUserName) => {
@@ -39,6 +41,7 @@ function Profile({ isLoggedIn, onLogout, onSignIn }) {
 
       // Optionally, update the state or trigger a re-fetch of the user profile 
       findUserByUsername(username);
+      
     } catch (error) {
       console.error('Error following/unfollowing user:', error);
     }

@@ -9,8 +9,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-
-
 function NavBar({ isLoggedIn, setCurrUser }) {
   const [currentUser, setCurrentUser] = useState({});
   const navigate = useNavigate();
@@ -30,9 +28,9 @@ function NavBar({ isLoggedIn, setCurrUser }) {
     const updatedUser = await client.account();
     setCurrentUser(updatedUser);
     console.log(updatedUser)
-    setCurrUser(currentUser);
     navigate('/home');
-
+   
+  
   }
 
   return (
