@@ -15,6 +15,7 @@ function MovieList() {
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const searchTermFromURL = params.get("searchTerm");
+        localStorage.setItem('isLoggedIn', 'true');
         if (searchTermFromURL) {
             setSearchTerm(searchTermFromURL);
             fetchMovies(searchTermFromURL);
