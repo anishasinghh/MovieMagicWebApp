@@ -1,0 +1,43 @@
+.table td {
+    background-color: black;
+    color: #FFF3FF; /* Set text color to white for better visibility */
+    font-family: 'Inter'; 
+    font-style: normal;
+    text-decoration: none;
+
+  }
+
+.table th {
+    background-color: #CF9FFF;
+    color: #FFF3FF;
+    font-family: 'Inter'; 
+    font-style: normal;
+    font-size: 30px;
+}
+
+h1 {
+    color: #CF9FFF;
+}
+
+.no-underline {
+    text-decoration: none; /* Remove underline from links with the no-underline class */
+    color: #FFF3FF
+  }
+
+  .dropdown {
+    background-color: #FFF3FF;
+  }
+
+  .button {
+    background-color: #CF9FFF;
+    color: black;
+    border-radius: 2px;
+  }
+
+  .table td input {
+    /* Add styles for input boxes within td elements */
+    background-color: #FFF3FF; /* Example background color */
+    color: black; /* Example text color */
+    border: 1px solid white; /* Example border style */
+  }
+
