@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import * as client from "./client";
-import "./editProfile.css"
+import "./editProfile.css";
+
 
 function EditProfile() {
   const { username } = useParams();
