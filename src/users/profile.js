@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./profile.css"
 
-function Profile({ movies, onLogout, onSignIn, isLoggedIn, loginCondition}) {
+function Profile({ movies, onLogout, onSignIn, isLoggedIn, loginCondition }) {
   const { username } = useParams();
   const [profile, setProfile] = useState({ username: "username", firstname: "first", followers: [], following: [], liked_movies: [], rewatched_movies: [], role: "" });
   const [currentUser, setCurrentUser] = useState({ username: "username", firstname: "first", followers: [], following: [], role: "" });
@@ -32,7 +32,7 @@ function Profile({ movies, onLogout, onSignIn, isLoggedIn, loginCondition}) {
 
   };
 
-  const handleFollowButtonClick = async (usernameToAdd, currentUserName) => {    
+  const handleFollowButtonClick = async (usernameToAdd, currentUserName) => {
     console.log(loginCondition);
     try {
       // Check if the current user is already following the profile user

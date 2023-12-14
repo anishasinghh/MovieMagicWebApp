@@ -12,10 +12,11 @@ function UserTable() {
     const users = await client.findAllUsers();
     setUsers(users);
   };
-  const [user, setUser] = useState({ username: "", password: "", role: "USER" });
+  const [user, setUser] = useState({ username: "", password: "", role: "" });
   const createUser = async () => {
     try {
       const newUser = await client.createUser(user);
+      console.log(newUser);
       setUsers([newUser, ...users]);
     } catch (err) {
       console.log(err);
@@ -31,7 +32,7 @@ function UserTable() {
   };
   const updateUser = async () => {
     try {
-      const status = await client.updateUser(user);
+      const status = await client.updateUserDetail(user);
       setUsers(users.map((u) => (u._id === user._id ? user : u)));
     } catch (err) {
       console.log(err);
@@ -54,12 +55,17 @@ function UserTable() {
         <thead>
           <tr>
             <th>Username</th>
+            <th>Password</th>
             <th>First Name</th>
             <th>Last Name</th>
+            <th>Role</th>
           </tr>
           <tr>
             <td>
               <input value={user.username} onChange={(e) => setUser({ ...user, username: e.target.value })} />
+            </td>
+            <td>
+              <input value={user.password} onChange={(e) => setUser({ ...user, password: e.target.value })} />
             </td>
             <td>
               <input value={user.firstName} onChange={(e) => setUser({ ...user, firstName: e.target.value })} />
@@ -68,10 +74,13 @@ function UserTable() {
               <input value={user.lastName} onChange={(e) => setUser({ ...user, lastName: e.target.value })} />
             </td>
             <td>
-              <select className="dropdown" value={user.role} onChange={(e) => setUser({ ...user, role: e.target.value })}>
+              <select
+                className="dropdown"
+                value={user.role}
+                onChange={(e) => setUser({ ...user, role: e.target.value })} // Update only the role property
+              >
                 <option value="USER">User</option>
                 <option value="ADMIN">Admin</option>
-
               </select>
             </td>
             <td className="text-nowrap">
@@ -87,8 +96,10 @@ function UserTable() {
             <tr key={user._id}>
               <td>
                 <Link className="no-underline" to={`/account/${user._id}`}>{user.username}</Link></td>
+              <td>{user.password}</td>
               <td>{user.firstName}</td>
               <td>{user.lastName}</td>
+              <td>{user.role}</td>
               <td>
                 <button className="btn button me-2"><BsPencil style={{ color: 'yellow' }} onClick={() => selectUser(user)} /></button>
               </td>
