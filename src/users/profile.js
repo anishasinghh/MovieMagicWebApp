@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./profile.css"
 
-function Profile({ movies, onLogout, onSignIn, isLoggedIn }) {
+function Profile({ movies, onLogout, onSignIn, isLoggedIn, loginCondition}) {
   const { username } = useParams();
   const [profile, setProfile] = useState({ username: "username", firstname: "first", followers: [], following: [], liked_movies: [], rewatched_movies: [], role: "" });
   const [currentUser, setCurrentUser] = useState({ username: "username", firstname: "first", followers: [], following: [], role: "" });
@@ -19,6 +19,11 @@ function Profile({ movies, onLogout, onSignIn, isLoggedIn }) {
     setProfile(foundUser);
     // setAppCurrentUser(foundUser);
     const current = await client.account();
+    if (current) {
+      console.log('current exists');
+      isLoggedIn();
+    }
+
     console.log("current username: " + current.username);
     setCurrentUser(current);
     // console.log(foundUser)
@@ -27,7 +32,8 @@ function Profile({ movies, onLogout, onSignIn, isLoggedIn }) {
 
   };
 
-  const handleFollowButtonClick = async (usernameToAdd, currentUserName) => {
+  const handleFollowButtonClick = async (usernameToAdd, currentUserName) => {    
+    console.log(loginCondition);
     try {
       // Check if the current user is already following the profile user
       const isFollowing = profile.followers.includes(currentUserName);
@@ -58,7 +64,7 @@ function Profile({ movies, onLogout, onSignIn, isLoggedIn }) {
   };
 
   useEffect(() => {
-    isLoggedIn();
+    // isLoggedIn();
     if (username) {
       findUserByUsername(username);
     }
@@ -120,7 +126,7 @@ function Profile({ movies, onLogout, onSignIn, isLoggedIn }) {
             </div>
           )}
           {/* <div className="col-md-1"> */}
-          {currentUser.firstName !== profile.firstName && (
+          {(currentUser.firstName !== profile.firstName && loginCondition) && (
             <div className="col-md-2">
               <button className='edit float-left' onClick={() => handleFollowButtonClick(profile.username, currentUser.username)}>
                 {profile.followers.includes(currentUser.username) ? 'Unfollow' : 'Follow'}
