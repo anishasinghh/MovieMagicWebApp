@@ -1,95 +1,95 @@
 /* username */
 .username {
-/* padding-top: 35px; */
-padding-bottom: 35px; 
-padding-top: 30px;
+    /* padding-top: 35px; */
+    padding-bottom: 35px;
+    padding-top: 30px;
 
-/* font-family: 'Inter'; */
-font-style: normal;
-font-weight: 400;
-font-size: 25px;
-line-height: 15px;
+    /* font-family: 'Inter'; */
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 15px;
 
-/* Faded Purple */
-color: #FFF3FF;
+    /* Faded Purple */
+    color: #FFF3FF;
 
 
 
 }
 
-.name{
+.name {
     padding-top: 80px;
-/* padding-bottom: 20px;  */
+    /* padding-bottom: 20px;  */
 
-/* font-family: 'Inter'; */
-font-style: normal;
-font-weight: 400;
-font-size: 60px;
-line-height: 15px;
+    /* font-family: 'Inter'; */
+    font-style: normal;
+    font-weight: 400;
+    font-size: 60px;
+    line-height: 15px;
 
-/* Faded Purple */
-color: #CF9FFF;
+    /* Faded Purple */
+    color: #CF9FFF;
 
 }
 
 .manage {
-background: #CF9FFF;
-/* font-family: 'Khmer'; */
-font-style: normal;
-font-weight: 400;
-font-size: 30px;
-line-height: 30px;
+    background: #CF9FFF;
+    /* font-family: 'Khmer'; */
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 30px;
 
-color: #FFFFFF;
-text-decoration: none;
-border-radius: 5px;
-padding: 5px;
+    color: #FFFFFF;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 5px;
 
 }
 
 .edit {
 
-background: #CF9FFF;
-border-radius: 10px;
-margin-top: 80px;
+    background: #CF9FFF;
+    border-radius: 10px;
+    margin-top: 80px;
 
 
-/* font-family: 'Khmer'; */
-font-style: normal;
-font-weight: 400;
-font-size: 20px;
-line-height: 30px;
+    /* font-family: 'Khmer'; */
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
 
-color: #FFFFFF;
+    color: #FFFFFF;
 }
 
-.followerFollowing{
-padding-top: 40px;
-/* font-family: 'Inter'; */
-font-style: normal;
-font-weight: 400;
-font-size: 25px;
-line-height: 12px;
+.followerFollowing {
+    padding-top: 40px;
+    /* font-family: 'Inter'; */
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 12px;
 
-/* Dark Purple */
-color: #CF9FFF;  
+    /* Dark Purple */
+    color: #CF9FFF;
 }
 
 .FollowerFollowingHeader {
     color: #CF9FFF;
     padding-top: 40px;
     /* font-family: 'Inter'; */
-font-style: normal;
-padding-left: 20px;
+    font-style: normal;
+    padding-left: 20px;
 
 }
 
 .FollowerFollowingList {
     color: #FFF3FF;
     /* font-family: 'Inter'; */
-font-style: normal;
-text-decoration: none;
-padding-left: 10px;
+    font-style: normal;
+    text-decoration: none;
+    padding-left: 10px;
 
 }
 
@@ -104,4 +104,33 @@ padding-left: 10px;
 .dtext {
     text-decoration: none;
     color: black;
+}
+
+
+.movie-cards {
+    width: 75%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.movie-card {
+    width: 50%;
+    height: 50%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.movie-info {
+    padding: 10px;
+    background-color: #f9f9f9;
+    flex-grow: 1;
 }

@@ -3,11 +3,13 @@ const request = axios.create({
   withCredentials: true,
 });
 
+export const BASE_API = process.env.REACT_APP_BASE_API_URL || "http://localhost:4000"
+
 const KEY = process.env.OMDB_API_KEY;
 const OMDB_API = "https://www.omdbapi.com";
-const LOCAL_MOVIE_API = "http://localhost:4000/api/movies";
-const LOCAL_USERS_LIKES_API = "http://localhost:4000/api/users/likes";
-const LOCAL_USERS_API = "http://localhost:4000/api/users";
+const LOCAL_MOVIE_API = `${BASE_API}/api/movies`;
+const LOCAL_USERS_LIKES_API = `${BASE_API}/api/users/likes`;
+const LOCAL_USERS_API = `${BASE_API}/api/users`;
 
 export const fullTextSearch = async (movieName) => {
   const response = await axios.get(
