@@ -33,7 +33,7 @@ function Profile({ movies, onLogout, onSignIn, isLoggedIn, loginCondition}) {
   };
 
   const handleFollowButtonClick = async (usernameToAdd, currentUserName) => {    
-    console.log(loginCondition);
+    console.log(profile.role);
     try {
       // Check if the current user is already following the profile user
       const isFollowing = profile.followers.includes(currentUserName);
@@ -152,7 +152,7 @@ function Profile({ movies, onLogout, onSignIn, isLoggedIn, loginCondition}) {
             </Link>
           </div>
         )}
-        {(profile.followers.includes(currentUser.username) || (profile.username === currentUser.username)) && (
+        {(((profile.followers.includes(currentUser.username) && currentUser.following.includes(profile.username ))|| profile.username === currentUser.username) && profile.role === "USER") && (
 
 
           <div className="container-fluid">
