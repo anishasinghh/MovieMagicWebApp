@@ -47,7 +47,7 @@ function MovieList() {
                 <div class="col">
                     <div class="card shadow-sm">
                         <img class="bd-placeholder-img card-img-top" src={movie.Poster == "N/A" ? MissingMovieImage : movie.Poster} />
-                        
+
                         <div class="card-body">
                             <h5 class="card-text" style={{ color: "black" }}>{movie.Title}</h5>
                             <div class="d-flex justify-content-between align-items-center">

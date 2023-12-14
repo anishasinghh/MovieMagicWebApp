@@ -3,6 +3,9 @@ import * as client from "./client";
 import { BsTrash3Fill, BsPlusCircleFill,  BsFillCheckCircleFill, BsPencil}
   from "react-icons/bs";
 import { Link } from "react-router-dom";
+import "./table.css"
+
+
 function UserTable() {
   const [users, setUsers] = useState([]);
   const fetchUsers = async () => {
@@ -57,7 +60,6 @@ function UserTable() {
           <tr>
             <td>
               <input value={user.username} onChange={(e) => setUser({ ...user, username: e.target.value })}/>
-              <input value={user.password} onChange={(e) => setUser({ ...user, password: e.target.value })}/>
             </td>
             <td>
               <input value={user.firstName} onChange={(e) => setUser({ ...user, firstName: e.target.value })}/>
@@ -66,7 +68,7 @@ function UserTable() {
               <input value={user.lastName} onChange={(e) => setUser({ ...user, lastName: e.target.value })}/>
             </td>
             <td>
-              <select value={user.role} onChange={(e) => setUser({ ...user, role: e.target.value })}>
+              <select className="dropdown"value={user.role} onChange={(e) => setUser({ ...user, role: e.target.value })}>
                 <option value="USER">User</option>
                 <option value="ADMIN">Admin</option>
                
@@ -84,14 +86,14 @@ function UserTable() {
           {users.map((user) => (
             <tr key={user._id}>
               <td>
-              <Link to={`/account/${user._id}`}>{user.username}</Link></td>
+              <Link className="no-underline" to={`/account/${user._id}`}>{user.username}</Link></td>
               <td>{user.firstName}</td>
               <td>{user.lastName}</td>
               <td>
-                <button className="btn btn-warning me-2"><BsPencil onClick={() => selectUser(user)} /></button>
+                <button className="btn button me-2"><BsPencil onClick={() => selectUser(user)} /></button>
               </td>
               <td>
-                <button className="btn btn-danger me-2" onClick={() => deleteUser(user)}><BsTrash3Fill /></button>
+                <button className="btn button me-2" onClick={() => deleteUser(user)}><BsTrash3Fill /></button>
               </td>
 
             </tr>))}
