@@ -82,38 +82,40 @@ function MovieDetails({ setUser, user, isLoggedIn }) {
         if (isLoggedIn) {
             if (!isLiked && !(currentUser.liked_movies.includes(currentMovie.id))) {
                 // If the movie is not liked, increase likes
-                const updatedMovie = await client.increaseLikes(imdbId);
-                setCurrentMovie(updatedMovie);
-                setLikes(updatedMovie.likes);
-                await client.updateUserLikes(currentUser._id, updatedMovie.id)
+                await client.increaseLikes(imdbId);
+                setLikes((prevLikes) => (prevLikes !== 'NA' ? prevLikes + 1 : 1));
 
-                setUsersLiked(prevusersLiked => [...prevusersLiked, currentUser]);
+                await client.updateUserLikes(currentUser._id, currentMovie.id);
+                setUsersLiked((prevUsersLiked) => [...prevUsersLiked, currentUser]);
+
                 setIsLiked(true);
-                // Update the liked movie in HomeUser component
                 setUser((prevUser) => ({
                     ...prevUser,
-                    liked_movies: isLiked
-                        ? prevUser.liked_movies.filter((movieId) => movieId !== currentMovie.id)
-                        : [...prevUser.liked_movies, currentMovie.id],
+                    liked_movies: [...prevUser.liked_movies, currentMovie.id],
                 }));
-                // Refresh the user's liked movies on the home page
-                fetchMovieDetailsById(imdbId);
-                // refreshUserList();
             } else {
                 // If the movie is liked, decrease likes
-                const updatedMovie = await client.decreaseLikes(imdbId);
-                setCurrentMovie(updatedMovie);
-                setLikes(updatedMovie.likes);
-                await client.removeUserLikes(currentUser._id, updatedMovie.id)
+                await client.decreaseLikes(imdbId);
+                setLikes((prevLikes) => (prevLikes !== 'NA' ? prevLikes - 1 : 'NA'));
 
-                setUsersLiked(prevusersLiked => prevusersLiked.filter(u => u._id !== currentUser._id));
+                await client.removeUserLikes(currentUser._id, currentMovie.id);
+                setUsersLiked((prevUsersLiked) =>
+                    prevUsersLiked.filter((u) => u._id !== currentUser._id)
+                );
+
                 setIsLiked(false);
-                // refreshUserList();
+                setUser((prevUser) => ({
+                    ...prevUser,
+                    liked_movies: prevUser.liked_movies.filter(
+                        (movieId) => movieId !== currentMovie.id
+                    ),
+                }));
             }
         } else {
             alert('Please log in to like this movie.');
         }
     };
+
 
     return (
         <div className="container" style={{ color: "white" }}>
@@ -141,37 +143,36 @@ function MovieDetails({ setUser, user, isLoggedIn }) {
                     <table className="table">
                         <tbody>
                             <tr>
-                                <th scope="row" style={{ backgroundColor: 'black', color: 'white' }}>Rating</th>
-                                <td style={{ backgroundColor: 'black', color: 'white' }}>{movieDetail.Rated}</td>
+                                <th className="table-header">Rating</th>
+                                <td className="table-data">{movieDetail.Rated}</td>
                             </tr>
                             <tr>
-                                <th scope="row" style={{ backgroundColor: 'black', color: 'white' }}>Genre</th>
-                                <td style={{ backgroundColor: 'black', color: 'white' }}>{movieDetail.Genre}</td>
+                                <th className="table-header">Genre</th>
+                                <td className="table-data">{movieDetail.Genre}</td>
                             </tr>
                             <tr>
-                                <th scope="row" style={{ backgroundColor: 'black', color: 'white' }}>Plot</th>
-                                <td style={{ backgroundColor: 'black', color: 'white' }}>{movieDetail.Plot}</td>
+                                <th className="table-header">Plot</th>
+                                <td className="table-data">{movieDetail.Plot}</td>
                             </tr>
                             <tr>
-                                <th scope="row" style={{ backgroundColor: 'black', color: 'white' }}>Released</th>
-                                <td style={{ backgroundColor: 'black', color: 'white' }}>{movieDetail.Released}</td>
+                                <th className="table-header">Released</th>
+                                <td className="table-data">{movieDetail.Released}</td>
                             </tr>
                             <tr>
-                                <th scope="row" style={{ backgroundColor: 'black', color: 'white' }}>Director</th>
-                                <td style={{ backgroundColor: 'black', color: 'white' }}>{movieDetail.Director}</td>
+                                <th className="table-header">Director</th>
+                                <td className="table-data">{movieDetail.Director}</td>
                             </tr>
                             <tr>
-                                <th scope="row" style={{ backgroundColor: 'black', color: 'white' }}>Likes</th>
-                                <td style={{ backgroundColor: 'black', color: 'white' }}>{likes}</td>
+                                <th className="table-header">Likes</th>
+                                <td className="table-data">{likes}</td>
                             </tr>
                             <tr>
-                                <th scope="row" style={{ backgroundColor: 'black', color: 'white' }}>Liked By</th>
-                                <td style={{ backgroundColor: 'black', color: 'white' }}>
+                                <th className="table-header">Liked By</th>
+                                <td className="table-data">
                                     <ul>
-                                        {console.log(usersLiked)}
                                         {usersLiked.map((likedUser, index) => (
-                                            <li key={index}>
-                                                <Link to={`/profile/${likedUser.username}`}>{likedUser.firstName} {likedUser.lastName}</Link>
+                                            <li key={index} className='fw-light'>
+                                                <Link style={{ color: "white", textDecoration: "none" }} to={`/profile/${likedUser.username}`}>{likedUser.firstName} {likedUser.lastName}</Link>
                                             </li>
                                         ))}
                                     </ul>

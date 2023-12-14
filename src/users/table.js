@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as client from "./client";
-import { BsTrash3Fill, BsPlusCircleFill,  BsFillCheckCircleFill, BsPencil}
+import { BsTrash3Fill, BsPlusCircleFill, BsFillCheckCircleFill, BsPencil }
   from "react-icons/bs";
 import { Link } from "react-router-dom";
 import "./table.css"
@@ -49,7 +49,7 @@ function UserTable() {
   useEffect(() => { fetchUsers(); }, []);
   return (
     <div>
-      <h1>User List</h1>
+      <h1 style={{ color: "white" }}>User List</h1>
       <table className="table">
         <thead>
           <tr>
@@ -59,41 +59,41 @@ function UserTable() {
           </tr>
           <tr>
             <td>
-              <input value={user.username} onChange={(e) => setUser({ ...user, username: e.target.value })}/>
+              <input value={user.username} onChange={(e) => setUser({ ...user, username: e.target.value })} />
             </td>
             <td>
-              <input value={user.firstName} onChange={(e) => setUser({ ...user, firstName: e.target.value })}/>
+              <input value={user.firstName} onChange={(e) => setUser({ ...user, firstName: e.target.value })} />
             </td>
             <td>
-              <input value={user.lastName} onChange={(e) => setUser({ ...user, lastName: e.target.value })}/>
+              <input value={user.lastName} onChange={(e) => setUser({ ...user, lastName: e.target.value })} />
             </td>
             <td>
-              <select className="dropdown"value={user.role} onChange={(e) => setUser({ ...user, role: e.target.value })}>
+              <select className="dropdown" value={user.role} onChange={(e) => setUser({ ...user, role: e.target.value })}>
                 <option value="USER">User</option>
                 <option value="ADMIN">Admin</option>
-               
+
               </select>
             </td>
             <td className="text-nowrap">
               <BsFillCheckCircleFill onClick={updateUser}
-              className="me-2 text-success fs-1 text" />
+                className="me-2 text-success fs-1 text" />
               <BsPlusCircleFill onClick={createUser}
-              className="text-success fs-1 text" />
-          </td>
+                className="text-success fs-1 text" />
+            </td>
           </tr>
         </thead>
         <tbody>
           {users.map((user) => (
             <tr key={user._id}>
               <td>
-              <Link className="no-underline" to={`/account/${user._id}`}>{user.username}</Link></td>
+                <Link className="no-underline" to={`/account/${user._id}`}>{user.username}</Link></td>
               <td>{user.firstName}</td>
               <td>{user.lastName}</td>
               <td>
-                <button className="btn button me-2"><BsPencil onClick={() => selectUser(user)} /></button>
+                <button className="btn button me-2"><BsPencil style={{ color: 'yellow' }} onClick={() => selectUser(user)} /></button>
               </td>
               <td>
-                <button className="btn button me-2" onClick={() => deleteUser(user)}><BsTrash3Fill /></button>
+                <button className="btn button me-2" onClick={() => deleteUser(user)}><BsTrash3Fill style={{ color: 'red' }} /></button>
               </td>
 
             </tr>))}

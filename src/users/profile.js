@@ -158,26 +158,25 @@ function Profile({ movies, onLogout, onSignIn, isLoggedIn }) {
 
               </div>
             </div>
-            <div className="row row-dashboard flex-row flex-wrap d-flex">
+            <div className="movie-cards">
               {profile.liked_movies.map((likedMovieId) => {
                 const likedMovie = movies.find((movie) => movie.id === likedMovieId);
 
                 if (likedMovie) {
                   return (
-                    <div key={likedMovie._id} className="col-12 col-md-6 col-xl-3">
-                      <div className="card" style={{ width: "18rem" }}>
-                        <img src={likedMovie.posterUrl} className="card-img-top" alt="..." />
+                    <div key={likedMovie.id} className="col">
+                      <div className="card shadow-sm">
+                        <img className="bd-placeholder-img card-img-top" src={likedMovie.posterUrl} alt={likedMovie.title} />
                         <div className="card-body">
-                          <h5 className="card-title">{likedMovie.title}</h5>
-                          <p className="card-text">Likes: {likedMovie.likes}</p>
-
-                          <button class="btn btn-outline-dark" >
-                            <Link to={`/details/${likedMovie.imdbID}`} className="dtext">
-                              Details
-                            </Link>
-                          </button>
-
-
+                          <h5 className="card-text" style={{ color: "black" }}>{likedMovie.title}</h5>
+                          <div className="d-flex justify-content-between align-items-center">
+                            <div className="btn-group">
+                              <Link to={`/details/${likedMovie.imdbID}`}>
+                                <button className="btn btn-outline-dark">Details</button>
+                              </Link>
+                            </div>
+                            <small className="text-body-secondary">Likes: {likedMovie.likes}</small>
+                          </div>
                         </div>
                       </div>
                     </div>

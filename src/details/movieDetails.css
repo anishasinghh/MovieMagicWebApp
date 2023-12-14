@@ -1,0 +1,15 @@
+/* Apply styles to table headers and table data */
+.table th,
+.table td {
+    background-color: black !important;
+    color: white !important;
+    font-family: 'Nokora', Arial, sans-serif;
+    font-weight: lighter;
+    padding: 15px !important;
+}
+
+/* Apply specific style to table headers */
+.table th {
+    margin-right: 20px;
+    font-size: 20px;
+}
