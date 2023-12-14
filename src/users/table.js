@@ -12,7 +12,7 @@ function UserTable() {
     const users = await client.findAllUsers();
     setUsers(users);
   };
-  const [user, setUser] = useState({ username: "", password: "", role: "" });
+  const [user, setUser] = useState({ username: "", password: "", role: "USER" });
   const createUser = async () => {
     try {
       const newUser = await client.createUser(user);
